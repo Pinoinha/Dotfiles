@@ -1,3 +1,5 @@
+! #include ".config/urxvt"
+
 xscreensaver.newLoginCommand: dm-tool switch-to-greeter
 
 ! Colors
@@ -5,19 +7,29 @@ xscreensaver.newLoginCommand: dm-tool switch-to-greeter
 *foreground:   #eff0eb
 *cursorColor:  #9aedfe
 
-!*color0:      #33303b
-!*color8:      #4f4b58
-!*color1:      #ff5c57
-!*color9:      #ff5c57
-!*color2:      #5af78e
-!*color10:     #5af78e
-!*color3:      #f3f99d
-!*color11:     #f3f99d
-!*color4:      #57c7ff
-!*color12:     #57c7ff
-!*color5:      #ff6ac1
-!*color13:     #ff6ac1
-!*color6:      #9aedfe
-!*color14:     #9aedfe
-!*color7:      #eff0eb
-!*color15:     #eff0eb
+! Fonte do URXVT
+URxvt*font: xft:Iosevka:size=10
+
+! Desativa a scrollbar do URxvt
+URxvt.scrollBar: false
+
+! Navy and Ivory colorscheme
+urxvt.foreground: 	#E8DFD6
+urxvt.background: 	#021B21
+urxvt.cursorColor:  #FFFFFF
+urxvt.color0:       #032C36
+urxvt.color8:       #065F73
+urxvt.color1:       #C2454E
+urxvt.color9:       #EF5847
+urxvt.color2:       #7CBF9E
+urxvt.color10:      #A2D9B1
+urxvt.color3:       #8A7A63
+urxvt.color11:      #BEB090
+urxvt.color4:       #2E3340
+urxvt.color12:      #61778D
+urxvt.color5:       #FF5879
+urxvt.color13:      #FF99A1
+urxvt.color6:       #44B5B1
+urxvt.color14:      #9ED9D8
+urxvt.color7:       #F2F1B9
+urxvt.color15:      #F6F6C9
