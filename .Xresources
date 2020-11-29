@@ -2,21 +2,45 @@
 
 xscreensaver.newLoginCommand: dm-tool switch-to-greeter
 
+! Tamanho do cursor
+Xcursor.size: 32
+
 ! Colors
 *background:   #121212
-*foreground:   #eff0eb
+!*foreground:   #eff0eb
 *cursorColor:  #9aedfe
 
 ! Fonte do URXVT
-URxvt*font: xft:Iosevka:size=10
+URxvt*font: xft:Gohu GohuFont:size=11
+
+! Habilita a extensão clipboard
+URxvt.perl-ext-common: default,clipboard
+
+! Suporte para a área de transferência com Ctrl+Shift+C/V
+! URxvt.perl-ext-common:  ...,clipboard,...
+!URxvt.clipboard.autocopy: true
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+! Desabilita o atalho padrão: Atl+Ctrl+C/V
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+
+! Desativa o keycap picture insert mode, e o ISO 14755 mode.
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! Desativa a scrollbar do URxvt
 URxvt.scrollBar: false
 
+! Transparência
+URxvt.transparent: true
+URxvt.shading: 15
+
 ! Navy and Ivory colorscheme
 urxvt.foreground: 	#E8DFD6
-urxvt.background: 	#021B21
-urxvt.cursorColor:  #FFFFFF
+!urxvt.background: 	#021B21
+!urxvt.cursorColor:  #FFFFFF
 urxvt.color0:       #032C36
 urxvt.color8:       #065F73
 urxvt.color1:       #C2454E
@@ -32,4 +56,3 @@ urxvt.color13:      #FF99A1
 urxvt.color6:       #44B5B1
 urxvt.color14:      #9ED9D8
 urxvt.color7:       #F2F1B9
-urxvt.color15:      #F6F6C9

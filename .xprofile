@@ -1,0 +1,33 @@
+# Wallpaper com feh
+feh --bg-max --randomize ~/Imagens/Wallpapers/* &
+
+# Xscreensaver
+xscreensaver &
+
+# Inicializa o dunst
+dunst &
+
+# Inicializa o Picom
+picom -b
+
+# Inicializa o Clipman
+xfce4-clipman &
+
+# Inicializa o pasystray
+pasystray --notify=all &
+
+# Inicializa o cbatticon
+cbatticon &
+
+# Inicializa a interface do Connman
+connman-gtk --tray &
+
+# Inicializa o Redshift
+redshift &
+
+# Inicializa o rofi
+rofi &
+
+# Inicializa o daemon do urxvt
+urxvtd -q -f -o &
+
