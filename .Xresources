@@ -6,9 +6,9 @@ xscreensaver.newLoginCommand: dm-tool switch-to-greeter
 Xcursor.size: 32
 
 ! Colors
-*background:   #121212
+!*background:   #121212
 !*foreground:   #eff0eb
-*cursorColor:  #9aedfe
+!*cursorColor:  #9aedfe
 
 ! Fonte do URXVT
 URxvt*font: xft:Gohu GohuFont:size=11
@@ -34,25 +34,63 @@ URxvt.iso14755_52: false
 URxvt.scrollBar: false
 
 ! Transparência
-URxvt.transparent: true
-URxvt.shading: 15
+! NOTA: essa transparência conflita com a do Picom
+!URxvt.transparent: true
+!URxvt.shading: 15
+ 
+! special
+*.foreground:   #c5c8c6
+*.background:   #1d1f21
+*.cursorColor:  #c5c8c6
+ 
+! black
+*.color0:       #1d1f21
+*.color8:       #969896
+ 
+! red
+*.color1:       #cc342b
+*.color9:       #cc342b
+ 
+! green
+*.color2:       #198844
+*.color10:      #198844
+ 
+! yellow
+*.color3:       #fba922
+*.color11:      #fba922
+ 
+! blue
+*.color4:       #3971ed
+*.color12:      #3971ed
+ 
+! magenta
+*.color5:       #a36ac7
+*.color13:      #a36ac7
+ 
+! cyan
+*.color6:       #0f73fb
+*.color14:      #0f73fb
+ 
+! white
+*.color7:       #c5c8c6
+*.color15:      #ffffff
 
 ! Navy and Ivory colorscheme
-urxvt.foreground: 	#E8DFD6
-!urxvt.background: 	#021B21
-!urxvt.cursorColor:  #FFFFFF
-urxvt.color0:       #032C36
-urxvt.color8:       #065F73
-urxvt.color1:       #C2454E
-urxvt.color9:       #EF5847
-urxvt.color2:       #7CBF9E
-urxvt.color10:      #A2D9B1
-urxvt.color3:       #8A7A63
-urxvt.color11:      #BEB090
-urxvt.color4:       #2E3340
-urxvt.color12:      #61778D
-urxvt.color5:       #FF5879
-urxvt.color13:      #FF99A1
-urxvt.color6:       #44B5B1
-urxvt.color14:      #9ED9D8
-urxvt.color7:       #F2F1B9
+!urxvt.foreground: 	#E8DFD6
+!!urxvt.background: 	#021B21
+!!urxvt.cursorColor:  #FFFFFF
+!urxvt.color0:       #032C36
+!urxvt.color8:       #065F73
+!urxvt.color1:       #C2454E
+!urxvt.color9:       #EF5847
+!urxvt.color2:       #7CBF9E
+!urxvt.color10:      #A2D9B1
+!urxvt.color3:       #8A7A63
+!urxvt.color11:      #BEB090
+!urxvt.color4:       #2E3340
+!urxvt.color12:      #61778D
+!urxvt.color5:       #FF5879
+!urxvt.color13:      #FF99A1
+!urxvt.color6:       #44B5B1
+!urxvt.color14:      #9ED9D8
+!urxvt.color7:       #F2F1B9
