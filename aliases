@@ -20,7 +20,7 @@ alias xinitrc='vim ~/.xinitrc'
 alias xprofile='vim ~/.xprofile'
 
 # pacman aliases
-alias ps='pacman -Ss'
+alias pss='pacman -Ss'
 alias pi='pacman -Qi'
 alias pl='pacman -Ql'
 alias p='doas pacman -S'
@@ -33,6 +33,8 @@ alias y='yay -S'
 
 # git aliases
 alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
 
 # vim aliases
 alias v='vim'
