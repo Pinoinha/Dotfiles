@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Simple X Hotkey Daemon config
+
+# --- WM-indepedent commands ---
+
+# Reload sxhkd
+super + r
+	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+
+# Spawn terminal
+super + Return
+	urxvt
+
+# Kill window
+super + w
+	xdotool getwindowfocus windowkill
+
+# Lock the screen
+super + shift + l
+	xscreensaver-command --lock
+
+# Media keys
+XF86AudioLowerVolume
+	pamixer @default_sink -d 5
+
+XF86AudioRaiseVolume
+	pamixer @default_sink -i 5
+
+XF86AudioMute
+	pamixer @default_sink -t
+
+XF86MicMute
+	amixer set Capture toggle
+
+# Open Firefox
+super + b
+	firefox
+
+# --- BSPWM specific ---
+
+# Kill X/Restart BSPWM
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+# Toggle Monocle Layout
+super + shift + m
+	bspc desktop -l next
+
+# Set node state (change layout of individual node)
+super + {t, shift + space, f}
+	bspc node -t {tiled, floating, ~fullscreen}
+
+# Move/resize floating windows with mouse
+super + {left click, right click}
+	bspc config {pointer_action1 move, pointer_action2 resize_side}
+
+# Focus windows
+super + {h,j,k,l}
+	bspc node -f {west, south, north, east}
