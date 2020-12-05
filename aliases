@@ -18,6 +18,13 @@ alias aliases='vim ~/.config/aliases'
 alias zshrc='vim ~/.zshrc'
 alias xinitrc='vim ~/.xinitrc'
 alias xprofile='vim ~/.xprofile'
+alias xresources='vim ~/.Xresources'
+alias xhk='vim ~/.config/sxhkd/sxhkdrc'
+alias bsp='vim ~/.config/bspwm/bspwmrc'
+alias pbar='vim ~/.config/polybar/config'
+alias dwconf="vim ~/bin/dwm-meu/config.h"
+alias dwcomp="cd ~/bin/dwm-meu && doas make clean install && cd"
+alias stconf='vim ~/bin/st-meu/config.h'
 
 # pacman aliases
 alias pss='pacman -Ss'
@@ -39,10 +46,6 @@ alias gc='git commit -m'
 # vim aliases
 alias v='vim'
 alias V='doas vim'
-
-# dwm aliases
-alias dwconf="vim ~/bin/dwm-meu/config.h"
-alias dwcomp="cd ~/bin/dwm-meu && doas make clean install && cd"
 
 # poweroff alias
 alias poweroff='doas poweroff'
