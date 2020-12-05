@@ -38,6 +38,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# Make sure this is before the 'exec' command or it won't be sourced.
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
+
 # Arruma o teclado
 setxkbmap -model abnt2 -layout br -variant abnt2
 
@@ -47,29 +51,11 @@ while true; do
 	sleep 1
 done &
 
-# Wallpaper com feh
-exec feh --bg-max --randomize ~/Pictures/Wallpapers/* &
-
-# Xscreensaver
-exec xscreensaver &
-
-# Inicializa o dunst
-exec dunst &
-
-# Inicializa o cbatticon
-exec cbatticon &
-
-# Inicializa a interface do Connman
-exec connman-gtk &
-
-# Inicializa o Redshift
-exec redshift &
-
-# Inicializa o daemon do urxvt
-exec urxvtd -q -f -o &
+# Inicializa o bspwm 
+exec bspwm
 
 # Inicializa o dwm
-exec dwm
+#exec dwm 
 
 #twm &
 #xclock -geometry 50x50-1+1 &

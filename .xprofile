@@ -1,5 +1,13 @@
+#!/bin/sh
+
+# Inicializa o sxhkd
+#sxhkd &
+
 # Wallpaper com feh
-feh --bg-max --randomize ~/Imagens/Wallpapers/* &
+#feh --bg-max --randomize ~/Imagens/Wallpapers/* &
+
+# Wallpaper e esquema de cores com PyWal
+wal -i ~/Imagens/Wallpapers/Natureza &
 
 # Xscreensaver
 xscreensaver &
@@ -29,5 +37,5 @@ redshift &
 rofi &
 
 # Inicializa o daemon do urxvt
-urxvtd -q -f -o &
+#urxvtd -q -f -o &
 
