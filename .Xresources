@@ -11,7 +11,7 @@ Xcursor.size: 32
 !*cursorColor:  #9aedfe
 
 ! Fonte do URXVT
-URxvt*font: xft:Gohu GohuFont:size=11
+URxvt*font: xft:Hack:size=11
 
 ! Habilita a extensão clipboard
 URxvt.perl-ext-common: default,clipboard
@@ -32,11 +32,6 @@ URxvt.iso14755_52: false
 
 ! Desativa a scrollbar do URxvt
 URxvt.scrollBar: false
-
-! Transparência
-! NOTA: essa transparência conflita com a do Picom
-!URxvt.transparent: true
-!URxvt.shading: 15
  
 ! special
 *.foreground:   #c5c8c6

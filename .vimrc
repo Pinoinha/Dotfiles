@@ -56,6 +56,16 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <C-c> :%y+<Return>
 nnoremap <C-c> :bp\|bd #<CR>
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" Autocomplete brackets, etc.
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
 set wrap linebreak nolist
 set nofoldenable
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected", "a", "e", "i", "o", "u"]

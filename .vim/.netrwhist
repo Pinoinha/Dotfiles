@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/math/bin/dwm-meu'
+let g:netrw_dirhist_3='/home/math/bin/st-meu'
 let g:netrw_dirhist_2='/home/math/.config/mopidy/podcast'
 let g:netrw_dirhist_1='/home/math/.config/qutebrowser/scripts'
 let g:netrw_dirhist_0='/home/math/.config/qutebrowser'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_8='/usr/src/vboxhost-6.1.14_OSE'
 let g:netrw_dirhist_7='/usr/src/linux-lts'
 let g:netrw_dirhist_6='/etc/X11/xinit/xinitrc.d'
 let g:netrw_dirhist_5='/home/math/Documentos/USP/SDII/VHDL/Projeto 3'
-let g:netrw_dirhist_4='/etc'
-let g:netrw_dirhist_3='/etc/modprobe.d'
