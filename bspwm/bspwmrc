@@ -5,23 +5,36 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 bspc config border_width         2
 bspc config window_gap          10
 
+# source the colors.
+. "${HOME}/.cache/wal/colors.sh"
+
+# set the border colors.
+bspc config normal_border_color "$color1"
+bspc config active_border_color "$color2"
+bspc config focused_border_color "$color15"
+
+# imports external rules
+bspc config external_rules_command ~/.config/bspwm/scripts/external_rules.sh
+
 # Colors
-bspc config normal_border_color "#121212"
-bspc config focused_border_color "#756bb1"
+#bspc config normal_border_color "#121212"
+#bspc config focused_border_color "#756bb1"
 
 bspc config split_ratio          0.5
 bspc config top_padding 30
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
 bspc config focus_follows_pointer true
 bspc config pointer_modifier mod4
 
-#bspc rule -a Gimp desktop='^8' state=floating follow=on
+# Opens applications in specific desktops
 bspc rule -a firefox desktop='^10'
 bspc rule -a qutebrowser desktop='^10'
 bspc rule -a TelegramDesktop desktop='^9' state=floating
+bspc rule -a zoom desktop='^9' state=floating
 bspc rule -a Steam desktop='^8'
 bspc rule -a dishonored.exe desktop='^8'
+
 #bspc rule -a mplayer2 state=floating
 #bspc rule -a Kupfer.py focus=on
 #bspc rule -a Screenkey manage=off
