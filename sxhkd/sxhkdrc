@@ -4,54 +4,67 @@
 
 # --- WM-indepedent commands ---
 
-# Reload sxhkd
+# reload sxhkd
 super + r
 	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
 
-# Spawn terminal
+# spawn terminal
 super + Return
 	st
 
+# spawn terminal with vim
+super + v
+	st -e vim ~/vimwiki/index.wiki
+
 # NOTA: O BSPWM vai matar todas as instâncias de alguns programas com essa opção
 # Ex.: Firefox. Prefira o bspc node -c.
-# Kill window
+# kill window
 #super + w
 #	xdotool getwindowfocus windowkill
 
-# Lock the screen
-super + shift + l
+# lock the screen
+alt + shift + l
 	xscreensaver-command --lock
 
-# Open Firefox
+# open Firefox
 super + b
 	firefox
 
-# Open qutebrowser
+# open qutebrowser
 super + q
 	qutebrowser
 
-# Open rofi
+# open rofi
 super + d
 	rofi -combi-modi window,drun,run,ssh -theme slate -font "gohu gohufont 11" -show combi -icon-theme "la-capitaine"
 
-# Print selection with scrot
-Print
-	scrot -s "%Y-%m-%d_%w-%h.png" -e 'mv $f $HOME/Imagens/Prints'
+# print selection with scrot
+@Print
+	scrot -s "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
 
-# Media keys
+# media keys
 XF86AudioLowerVolume
-	pamixer @default_sink -d 5
+	pulsemixer --change-volume -5
 
 XF86AudioRaiseVolume
-	pamixer @default_sink -i 5
+	pulsemixer --change-volume +5
 
 XF86AudioMute
-	pamixer @default_sink -t
+	pulsemixer --toggle-mute
 
 XF86AudioMicMute
-	amixer set Capture toggle
+	pulsemixer --id source-1 --toggle-mute
 
-# Backlight control
+XF86AudioPlay
+	mpc toggle
+
+XF86AudioPrev
+	mpc prev
+
+XF86AudioNext
+	mpc next
+
+# backlight control
 XF86MonBrightnessUp
 	xbacklight -inc 10
 
@@ -60,29 +73,35 @@ XF86MonBrightnessUp
 
 # --- BSPWM specific ---
 
-# Kill X/Restart BSPWM
+# kill X/Restart BSPWM
 super + shift + {q,r}
 	bspc {quit,wm -r}; notify-send 'bspwm' 'Restarted'
 
-# Close window
+# close window
 super + w
 	bspc node -c 
 
-# Toggle Monocle Layout
+# toggle Monocle layout
 super + shift + m
 	bspc desktop -l next
 
-# Set node state (change layout of individual node)
+# set node state (change layout of individual node)
 super + {t, shift + space, f}
 	bspc node -t {tiled, \~floating, \~fullscreen}
 
-# Move/resize floating windows with mouse
+# move/resize floating windows with mouse
 super + {left click, right click}
 	bspc config {pointer_action1 move, pointer_action2 resize_side}
 
 # move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+super + shift + {Left,Down,Up,Right}
+	bspc node -v {-40 0,0 40,0 -40,40 0}
+
+# center a floating window in the screen
+
+# toggle node sticky (in all desktops)
+super + i
+	bspc node -g sticky
 
 # Focus windows
 super + {h,j,k,l}
@@ -100,9 +119,13 @@ super + ctrl + {h,j,k,l}
 super + ctrl + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
-# Focus on/send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+# focus on desktop
+super + {1-9,0}
+	bspc desktop -f '^{1-9,10}'
+
+# send window to desktop and focus on it
+super + shift + {1-9,0}
+	bspc node -d '^{1-9,10}' --follow
 
 # Focus the next/previous desktop in the current monitor
 super + {n,m}
@@ -111,3 +134,11 @@ super + {n,m}
 # Focus the last node/desktop
 super + Tab
 	bspc desktop -f last
+
+# preselect direction
+super + {Left,Down,Up,Right}
+	bspc node -p {west,south,north,east}
+
+# swap node in direction
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east} --follow
