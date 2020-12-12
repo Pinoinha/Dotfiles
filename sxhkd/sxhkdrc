@@ -14,7 +14,7 @@ super + Return
 
 # spawn terminal with vim
 super + v
-	st -e vim ~/vimwiki/index.wiki
+	st -e vim ~/vimwiki/index.md
 
 # NOTA: O BSPWM vai matar todas as instâncias de alguns programas com essa opção
 # Ex.: Firefox. Prefira o bspc node -c.

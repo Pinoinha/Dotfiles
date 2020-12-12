@@ -26,6 +26,7 @@ bspc config borderless_monocle   false
 bspc config gapless_monocle      false
 bspc config focus_follows_pointer true
 bspc config pointer_modifier mod4
+bspc config automatic_scheme longest_side
 
 # Opens applications in specific desktops
 bspc rule -a firefox desktop='10'
@@ -36,11 +37,9 @@ bspc rule -a Steam desktop='8'
 bspc rule -a dishonored.exe desktop='8'
 bspc rule -a Sxiv state=floating
 bspc rule -a mpv state=floating
+bspc rule -a Galculator state=floating
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-
-# Inicializa o polybar
-$HOME/.config/polybar/launch.sh
 
 # Arruma o ponteiro do mouse
 xsetroot -cursor_name left_ptr &
