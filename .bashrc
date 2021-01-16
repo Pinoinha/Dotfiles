@@ -3,32 +3,15 @@
 
 alias ls='ls --color=auto'
 
-# if on tty0, startx automatically
-[ `tty` = /dev/tty2 ] && startx
-
-# Prompt padrão
-#PS1='[\u@\h \W]\$ '
-
 # Importando os aliases
 [ -f "$HOME/.config/aliases" ] && . "$HOME/.config/aliases"
 
 # Importando as variáveis de ambiente
-[ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
+[ -f "$HOME/.config/env" ] && . "$HOME/.config/env"
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# Usa o bash-completion, se possível
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
 
-alias ls='ls --color=auto'
-
-# if on tty0, startx automatically
-[ `tty` = /dev/tty2 ] && startx
-
-# Prompt padrão
-#PS1='[\u@\h \W]\$ '
-
-# Importando os aliases
-[ -f "$HOME/.config/aliases" ] && . "$HOME/.config/aliases"
-
-# Importando as variáveis de ambiente
-[ -f "$HOME/.bash_profile" ] && . "$HOME/.bash_profile"
-
+# Lança o X automaticamente
+[ `tty` = '/dev/tty1' ] && startx
