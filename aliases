@@ -15,16 +15,42 @@
 alias aliases='vim ~/.config/aliases'
 
 # Config files aliases
-alias zshrc='vim ~/.zshrc'
+alias zshrc='vim ~/.config/zsh/.zshrc'
+
+alias bashrc='vim ~/.bashrc'
+
+alias tmconf='vim ~/.config/termite/config'
+
+alias venv='vim ~/.config/env'
+
 alias xinitrc='vim ~/.xinitrc'
 alias xprofile='vim ~/.xprofile'
 alias xresources='vim ~/.Xresources'
+alias xmap='vim ~/.Xmodmap'
+
 alias xhk='vim ~/.config/sxhkd/sxhkdrc'
 alias bsp='vim ~/.config/bspwm/bspwmrc'
 alias pbar='vim ~/.config/polybar/config'
-alias dwconf="vim ~/bin/dwm-meu/config.h"
-alias dwcomp="cd ~/bin/dwm-meu && doas make clean install && cd"
-alias stconf='vim ~/bin/st-meu/config.h'
+
+alias lfrc='vim ~/.config/lf/lfrc'
+
+alias vimrc='vim ~/.vim/vimrc'
+
+alias ncc='vim ~/.config/ncmpcpp/config'
+alias mpconf='vim ~/.config/mpd/mpd.conf'
+
+# suckless utilities
+alias dwconf="vim ~/.local/repos/dwm-meu/config.def.h"
+alias dwcomp="cd ~/.local/repos/dwm-meu && rm -rf config.h && doas make clean install && cd"
+
+alias stconf='vim ~/.local/repos/st-meu/config.def.h'
+alias stcomp='cd ~/.local/repos/st-meu && rm -rf config.h && doas make clean install && cd'
+
+alias dmconf="vim ~/.local/repos/dmenu-meu/config.def.h"
+alias dmcomp='cd ~/.local/repos/dmenu-meu && rm -rf config.h && doas make clean install && cd'
+
+alias slconf="vim ~/.local/repos/slock-meu/config.def.h"
+alias slcomp='cd ~/.local/repos/slock-meu && rm -rf config.h && doas make clean install && cd'
 
 # pacman aliases
 alias pss='pacman -Ss'
@@ -32,10 +58,9 @@ alias pi='pacman -Qi'
 alias pl='pacman -Ql'
 alias p='doas pacman -S'
 alias pr='doas pacman -Rs'
-alias pyu='doas pacman -Syu'
 
 # yay aliases
-alias ys='yay -Ss'
+alias yss='yay -Ssa'
 alias y='yay -S'
 
 # git aliases
@@ -43,9 +68,21 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit -m'
 
-# vim aliases
+# application aliases
 alias v='vim'
 alias V='doas vim'
+alias pm='pulsemixer'
+alias yda='youtube-dl -4 -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
+alias key='$HOME/bin/xev_keys'
+alias muttrc='vim $HOME/.config/mutt/muttrc'
+alias t='todo.sh'
+alias xclip='xclip -sel copy'
+
+# to see window classes, for use in bsp rules
+alias class='xprop | grep CLASS'
+
+# quickly change kb layout
+alias xkb='setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:swapescape'
 
 # poweroff alias
-alias poweroff='doas poweroff'
+alias pwr='doas poweroff'

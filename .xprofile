@@ -1,41 +1,34 @@
 #!/bin/sh
 
-# Inicializa o sxhkd
-#sxhkd &
+# Inicializa o sxhkd 
+pgrep -x sxhkd > /dev/null || sxhkd &
 
-# Wallpaper com feh
-#feh --bg-max --randomize ~/Imagens/Wallpapers/* &
-
-# Wallpaper e esquema de cores com PyWal
-wal -i ~/Imagens/Wallpapers/Natureza &
-
-# Xscreensaver
-xscreensaver &
+# Setta um wallpaper aleatorio
+wallpaper &
 
 # Inicializa o dunst
 dunst &
 
 # Inicializa o Picom
-picom -b
+picom -b --experimental-backends
 
-# Inicializa o Clipman
-xfce4-clipman &
-
-# Inicializa o pasystray
-pasystray --notify=all &
-
-# Inicializa o cbatticon
-cbatticon &
-
-# Inicializa a interface do Connman
-connman-gtk --tray &
+# Inicializa o Clipit
+clipit &
 
 # Inicializa o Redshift
 redshift &
 
-# Inicializa o rofi
-rofi &
+# Ativa o numlock
+numlockx &
 
-# Inicializa o daemon do urxvt
-#urxvtd -q -f -o &
+# Aumenta a taxa de repetição do teclado para 250 ms de delay e 40 repetições por segundo
+xset r rate 250 40
 
+# Inicializa o connman-gtk
+connman-gtk &
+
+# Ativa o unclutter
+unclutter &
+
+# MPD daemon start (if no other user instance exists)
+[ ! -s ~/.config/mpd/pid ] && mpd

@@ -1,0 +1,46 @@
+# Configuração das variáveis de ambiente
+
+# export EDITOR
+export EDITOR="vim"
+
+# export PAGER
+export PAGER="less"
+
+# Steam variable
+export STEAM_FRAME_FORCE_CLOSE=1 steam
+
+# XDG dirs
+export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+
+# GO path
+export GOPATH="$XDG_DATA_HOME/go"
+export GOBIN="$GOPATH/bin"
+
+# Cargo
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export CARGO_BIN="$CARGO_HOME/bin"
+
+# Rustup
+ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+# GTK-2.0
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+
+# GPG
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
+# pass
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass""
+
+# Bash
+export HISTFILE="$XDG_DATA_HOME/bash/history"
+
+# TERMINAL variable
+export TERMINAL=st
+
+# Prompt
+export PS1="\[\e[1;36m\][\[\e[32m\]\u\[\e[31m\]@\[\e[35m\]\h\[\e[1;36m\]] \[\e[1;32m\]\W \$: \[\e[0m\]"
+
+export PATH="$HOME/.local/bin":"$CARGO_BIN":"$GOBIN":$PATH

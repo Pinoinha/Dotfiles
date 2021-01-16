@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 # Simple X Hotkey Daemon config
 
@@ -9,47 +9,74 @@ super + r
 	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
 
 # spawn terminal
-super + Return
-	st
+super + {Return, KP_Enter}
+	termite
 
 # spawn terminal with vim
 super + v
-	st -e vim ~/vimwiki/index.md
-
-# NOTA: O BSPWM vai matar todas as instâncias de alguns programas com essa opção
-# Ex.: Firefox. Prefira o bspc node -c.
-# kill window
-#super + w
-#	xdotool getwindowfocus windowkill
+	termite -e 'vim /home/math/vimwiki/index.md'
 
 # lock the screen
 alt + shift + l
-	xscreensaver-command --lock
+	slock
 
-# open Firefox
-super + b
-	firefox
+# open Brave
+ctrl + alt + b
+	brave
 
-# open qutebrowser
-super + q
-	qutebrowser
+# open Librewolf
+ctrl + shift + b
+	librewolf
 
-# open rofi
+# run dmenu
 super + d
-	rofi -combi-modi window,drun,run,ssh -theme slate -font "gohu gohufont 11" -show combi -icon-theme "la-capitaine"
+	dmenu_run
+
+# run passemu
+super + shift + d
+	passmenu2
+
+# open lf
+super + e
+	termite -e lf-ueberzug
+
+# open htop
+super + p
+	termite -e htop
+
+# open ncmpcpp
+super + y
+	termite -e ncmpcpp
+
+# open newsboat
+super + o
+	termite -e newsboat
 
 # print selection with scrot
 @Print
 	scrot -s "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
 
+# print current window with scrot
+shift + @Print
+	scrot -u "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
+
 # media keys
 XF86AudioLowerVolume
+	pulsemixer --change-volume -5
+
+shift + F6
 	pulsemixer --change-volume -5
 
 XF86AudioRaiseVolume
 	pulsemixer --change-volume +5
 
+shift + F7
+	pulsemixer --change-volume +5
+
 XF86AudioMute
+	pulsemixer --toggle-mute
+
+shift + F1
 	pulsemixer --toggle-mute
 
 XF86AudioMicMute
@@ -66,14 +93,20 @@ XF86AudioNext
 
 # backlight control
 XF86MonBrightnessUp
-	xbacklight -inc 10
+	xbacklight -inc 5
+
+shift + F12
+	xbacklight -inc 5
 
 XF86MonBrightnessUp
-	xbacklight -dec 10
+	xbacklight -dec 5
+
+shift + F11
+	xbacklight -dec 5
 
 # --- BSPWM specific ---
 
-# kill X/Restart BSPWM
+# kill X/restart BSPWM
 super + shift + {q,r}
 	bspc {quit,wm -r}; notify-send 'bspwm' 'Restarted'
 
@@ -82,12 +115,24 @@ super + w
 	bspc node -c 
 
 # toggle Monocle layout
-super + shift + m
+super + alt + m
 	bspc desktop -l next
 
-# set node state (change layout of individual node)
-super + {t, shift + space, f}
-	bspc node -t {tiled, \~floating, \~fullscreen}
+# set node tiling
+super + t
+	bspc node -t tiled
+
+# set node pseudotiling
+super + shift + t
+	bspc node -t pseudo_tiled
+
+# toggle node floating
+super + shift + space
+	bspc node -t \~floating
+
+# toggle node fullscreen
+super + f
+	bspc node -t \~fullscreen
 
 # move/resize floating windows with mouse
 super + {left click, right click}
@@ -97,39 +142,41 @@ super + {left click, right click}
 super + shift + {Left,Down,Up,Right}
 	bspc node -v {-40 0,0 40,0 -40,40 0}
 
-# center a floating window in the screen
-
 # toggle node sticky (in all desktops)
 super + i
 	bspc node -g sticky
 
-# Focus windows
+# focus nodes
 super + {h,j,k,l}
 	bspc node -f {west, south, north, east}
 
-# Focus the next/previous window in the current desktop
+# focus the next/previous node in the current desktop
 super + {_,shift + }a
 	bspc node -f {next,prev}.local.!hidden.window
 
-# expand a window by moving one of its side outward
-super + ctrl + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+# expand a node by moving two of its side outward
+super + ctrl + l
+	bspc node -z {bottom 0 20,right 20 0}
 
-# contract a window by moving one of its side inward
-super + ctrl + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# contract a node by moving two of its side inward
+super + ctrl + h
+	bspc node -z {bottom 0 -20,right -20 0}
 
 # focus on desktop
 super + {1-9,0}
 	bspc desktop -f '^{1-9,10}'
 
-# send window to desktop and focus on it
+# send node to desktop and focus on it
 super + shift + {1-9,0}
 	bspc node -d '^{1-9,10}' --follow
 
-# Focus the next/previous desktop in the current monitor
+# focus the next/previous desktop in the current monitor
 super + {n,m}
 	bspc desktop -f {prev,next}.local
+
+# send node to prev desktop
+super + shift + {n,m}
+	bspc node -d {prev,next} --follow
 
 # Focus the last node/desktop
 super + Tab
