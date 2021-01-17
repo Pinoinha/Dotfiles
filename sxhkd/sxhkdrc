@@ -12,7 +12,7 @@ super + r
 super + {Return, KP_Enter}
 	termite
 
-# spawn terminal with vim
+# spawn terminal with vimwiki
 super + v
 	termite -e 'vim /home/math/vimwiki/index.md'
 
@@ -36,21 +36,9 @@ super + d
 super + shift + d
 	passmenu2
 
-# open lf
-super + e
-	termite -e lf-ueberzug
-
-# open htop
-super + p
-	termite -e htop
-
-# open ncmpcpp
-super + y
-	termite -e ncmpcpp
-
-# open newsboat
-super + o
-	termite -e newsboat
+# run terminal applications
+super + e ; {1, 2, 3, 4, 5}
+	termite -e {lf-ueberzug, htop, ncmpcpp, newsboat, pulsemixer}
 
 # print selection with scrot
 @Print
@@ -127,7 +115,7 @@ super + shift + t
 	bspc node -t pseudo_tiled
 
 # toggle node floating
-super + shift + space
+super + space
 	bspc node -t \~floating
 
 # toggle node fullscreen
