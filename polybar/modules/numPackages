@@ -1,0 +1,4 @@
+#!/bin/env/bash
+
+# prints the number of packages installed
+echo "$(pacman -Q | wc -l)"
