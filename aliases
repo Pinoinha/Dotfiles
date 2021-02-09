@@ -12,55 +12,62 @@
   fi
 
 # Open alias file
-alias aliases='vim ~/.config/aliases'
+alias aliases='nvim ~/.config/aliases'
 
 # Config files aliases
-alias zshrc='vim ~/.config/zsh/.zshrc'
+alias zshrc='nvim ~/.config/zsh/.zshrc'
 
-alias bashrc='vim ~/.bashrc'
+alias bashrc='nvim ~/.bashrc'
 
-alias tmconf='vim ~/.config/termite/config'
+alias tmconf='nvim ~/.tmux.conf'
 
-alias venv='vim ~/.config/env'
+alias tconf='nvim ~/.config/termite/config'
 
-alias xinitrc='vim ~/.xinitrc'
-alias xprofile='vim ~/.xprofile'
-alias xresources='vim ~/.Xresources'
-alias xmap='vim ~/.Xmodmap'
+alias alconf='nvim ~/.config/alacritty/alacritty.yml'
 
-alias xhk='vim ~/.config/sxhkd/sxhkdrc'
-alias bsp='vim ~/.config/bspwm/bspwmrc'
-alias pbar='vim ~/.config/polybar/config'
+alias venv='nvim ~/.config/env'
 
-alias lfrc='vim ~/.config/lf/lfrc'
+alias xinitrc='nvim ~/.xinitrc'
+alias xprofile='nvim ~/.xprofile'
+alias xresources='nvim ~/.Xresources'
+alias xmap='nvim ~/.Xmodmap'
 
-alias vimrc='vim ~/.vim/vimrc'
+alias xhk='nvim ~/.config/sxhkd/sxhkdrc'
+alias bsp='nvim ~/.config/bspwm/bspwmrc'
+alias pbar='nvim ~/.config/polybar/config'
 
-alias ncc='vim ~/.config/ncmpcpp/config'
-alias mpconf='vim ~/.config/mpd/mpd.conf'
+alias lfrc='nvim ~/.config/lf/lfrc'
+
+alias vimrc='nvim ~/.vim/vimrc'
+alias nvrc='nvim ~/.config/nvim/init.vim'
+
+alias ncc='nvim ~/.config/ncmpcpp/config'
+alias mpconf='nvim ~/.config/mpd/mpd.conf'
 
 # suckless utilities
-alias dwconf="vim ~/.local/repos/dwm-meu/config.def.h"
+alias dwconf="nvim ~/.local/repos/dwm-meu/config.def.h"
 alias dwcomp="cd ~/.local/repos/dwm-meu && rm -rf config.h && doas make clean install && cd"
 
-alias stconf='vim ~/.local/repos/st-meu/config.def.h'
+alias stconf='nvim ~/.local/repos/st-meu/config.def.h'
 alias stcomp='cd ~/.local/repos/st-meu && rm -rf config.h && doas make clean install && cd'
 
-alias dmconf="vim ~/.local/repos/dmenu-meu/config.def.h"
+alias dmconf="nvim ~/.local/repos/dmenu-meu/config.def.h"
 alias dmcomp='cd ~/.local/repos/dmenu-meu && rm -rf config.h && doas make clean install && cd'
 
-alias slconf="vim ~/.local/repos/slock-meu/config.def.h"
+alias slconf="nvim ~/.local/repos/slock-meu/config.def.h"
 alias slcomp='cd ~/.local/repos/slock-meu && rm -rf config.h && doas make clean install && cd'
 
 # pacman aliases
+alias p='doas pacman -S'
 alias pss='pacman -Ss'
+alias psi='pacman -Si'
 alias pi='pacman -Qi'
 alias pl='pacman -Ql'
-alias p='doas pacman -S'
 alias pr='doas pacman -Rs'
 
 # yay aliases
 alias yss='yay -Ssa'
+alias ysi='yay -Si'
 alias y='yay -S'
 
 # git aliases
@@ -69,17 +76,21 @@ alias ga='git add'
 alias gc='git commit -m'
 
 # application aliases
-alias v='vim'
-alias V='doas vim'
+alias v='nvim'
+alias V='doas nvim'
 alias pm='pulsemixer'
 alias yda='youtube-dl -4 -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
-alias key='$HOME/bin/xev_keys'
-alias muttrc='vim $HOME/.config/mutt/muttrc'
-alias t='todo.sh'
+alias muttrc='nvim $HOME/.config/mutt/muttrc'
 alias xclip='xclip -sel copy'
+
+# todo.txt
+alias t='todo.sh'
 
 # to see window classes, for use in bsp rules
 alias class='xprop | grep CLASS'
+
+# record whole screen with ffmpeg
+alias rec='ffmpeg -f x11grab -s 1920x1080 -i :0.0 Vídeos/rec.mp4'
 
 # quickly change kb layout
 alias xkb='setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:swapescape'
