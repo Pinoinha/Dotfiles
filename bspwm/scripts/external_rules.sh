@@ -7,6 +7,9 @@ instance="$3"
 eval $4
 desktop="$(bspc query -D -d ${desktop:-focused})"
 
-# terminals spawned in desktops 9 and 10 are floating
-[[ "$class:$instance" = 'Termite:termite' && "$desktop" = "$(bspc query -D -d ^7)" || "$desktop" = "$(bspc query -D -d ^6)" ]] \
+# make polybar appear on top
+[ ! -z "$3" ] && xdo raise -N Polybar
+
+# terminals spawned in desktops 5 and 6 are floating
+[[ "$class:$instance" = 'Alacritty:Alacritty' && "$desktop" = "$(bspc query -D -d ^6)" || "$desktop" = "$(bspc query -D -d ^5)" ]] \
         && echo 'layer=above state=floating'

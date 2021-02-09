@@ -2,19 +2,31 @@
 
 # Simple X Hotkey Daemon config
 
-# --- WM-indepedent commands ---
+# -- WM-indepedent commands -- #
 
 # reload sxhkd
 super + r
 	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
 
 # spawn terminal
-super + {Return, KP_Enter}
-	termite
+super + Return
+	$TERMINAL
 
-# spawn terminal with vimwiki
+# spawn terminal as floating
+super + shift + Return
+	bspc rule -a \* -o state=floating && $TERMINAL
+
+# spawn vimwiki
 super + v
-	termite -e 'vim /home/math/vimwiki/index.md'
+	$TERMINAL -e 'nvim'
+
+# run terminal applications
+super + e ; {1, 2, 3, 4, 5, 6}
+	$TERMINAL -e {lf, ncmpcpp, ncspot, newsboat, htop, pulsemixer}
+
+# run graphical applications
+super + g ; {1, 2, 3}
+	{brave, librewolf, galculator}
 
 # lock the screen
 alt + shift + l
@@ -36,30 +48,17 @@ super + d
 super + shift + d
 	passmenu2
 
-# run terminal applications
-super + e ; {1, 2, 3, 4, 5}
-	termite -e {lf-ueberzug, htop, ncmpcpp, newsboat, pulsemixer}
+# -- Screenshots -- #
 
 # print selection with scrot
 @Print
-	scrot -s "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
+	scrot -s -f '%Y-%m-%d_$wx$h.png' -e 'mv $f /home/math/Imagens/Prints'
 
 # print current window with scrot
 shift + @Print
 	scrot -u "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
 
-# media keys
-XF86AudioLowerVolume
-	pulsemixer --change-volume -5
-
-shift + F6
-	pulsemixer --change-volume -5
-
-XF86AudioRaiseVolume
-	pulsemixer --change-volume +5
-
-shift + F7
-	pulsemixer --change-volume +5
+# -- Audio Control -- #
 
 XF86AudioMute
 	pulsemixer --toggle-mute
@@ -67,39 +66,67 @@ XF86AudioMute
 shift + F1
 	pulsemixer --toggle-mute
 
+XF86AudioLowerVolume
+	pulsemixer --change-volume -5
+
+shift + F2
+	pulsemixer --change-volume -5
+
+XF86AudioRaiseVolume
+	pulsemixer --change-volume +5
+
+shift + F3
+	pulsemixer --change-volume +5
+
 XF86AudioMicMute
 	pulsemixer --id source-1 --toggle-mute
 
-XF86AudioPlay
-	mpc toggle
+shift + F4
+	pulsemixer --id source-1 --toggle-mute
+
+shift + F5
+	mpc stop
 
 XF86AudioPrev
 	mpc prev
 
+shift + F6
+	mpc prev
+
+XF86AudioPlay
+	mpc toggle
+
+shift + F7
+	mpc toggle
+
 XF86AudioNext
 	mpc next
 
-# backlight control
-XF86MonBrightnessUp
-	xbacklight -inc 5
+shift + F8
+	mpc next
+	
+# -- Brightness Control -- #
 
-shift + F12
-	xbacklight -inc 5
-
-XF86MonBrightnessUp
-	xbacklight -dec 5
+XF86MonBrightnessDown
+	xbacklight -dec 10
 
 shift + F11
-	xbacklight -dec 5
+	xbacklight -dec 10
 
-# --- BSPWM specific ---
+XF86MonBrightnessUp
+	xbacklight -inc 10
+
+shift + F12
+	xbacklight -inc 10
+
+# -- BSPWM specific -- #
 
 # kill X/restart BSPWM
 super + shift + {q,r}
 	bspc {quit,wm -r}; notify-send 'bspwm' 'Restarted'
 
-# close window
-super + w
+# kil window
+super + shift + w
 	bspc node -c 
 
 # toggle Monocle layout
@@ -159,16 +186,20 @@ super + shift + {1-9,0}
 	bspc node -d '^{1-9,10}' --follow
 
 # focus the next/previous desktop in the current monitor
-super + {n,m}
+super + {bracketleft,bracketright}
 	bspc desktop -f {prev,next}.local
 
 # send node to prev desktop
-super + shift + {n,m}
+super + shift + {bracketleft,bracketright}
 	bspc node -d {prev,next} --follow
 
 # Focus the last node/desktop
 super + Tab
 	bspc desktop -f last
+
+# send node to last desktop
+super + shift + Tab
+	bspc node -d last --follow
 
 # preselect direction
 super + {Left,Down,Up,Right}
@@ -177,3 +208,7 @@ super + {Left,Down,Up,Right}
 # swap node in direction
 super + shift + {h,j,k,l}
 	bspc node -s {west,south,north,east} --follow
+
+# rotate nodes 90º
+super + ctrl + r
+	bspc node @/ -R 90
