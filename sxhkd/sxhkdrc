@@ -121,9 +121,13 @@ shift + F12
 
 # -- BSPWM specific -- #
 
-# kill X/restart BSPWM
-super + shift + {q,r}
-	bspc {quit,wm -r}; notify-send 'bspwm' 'Restarted'
+# kill X
+super + alt + q
+	bspc quit
+
+# restart BPSWM
+super + shift + r
+	bspc wm -r; notify-send 'bspwm' 'Restarted'
 
 # kil window
 super + shift + w
@@ -212,3 +216,11 @@ super + shift + {h,j,k,l}
 # rotate nodes 90º
 super + ctrl + r
 	bspc node @/ -R 90
+
+# hides node
+super + b
+	bspc node -g hidden=on
+
+# unhides node
+super + shift + b
+	bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
