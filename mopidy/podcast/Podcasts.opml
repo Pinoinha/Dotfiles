@@ -1,9 +1,0 @@
-<!-- Este arquivo contém os RSS dos podcasts que desejo tocar no ncmpcpp, com o Mopidy-Podcast -->
-
-<?xml version="1.0" encoding="UTF-8"?>
-<opml>
-  <body>
-    <outline text="Respondendo em Voz Alta" type="rss" xmlUrl="http://www.npr.org/rss/podcast.php?id=510298" />
-    <outline text="Nerdcast" type="include" url="https://feeds.soundcloud.com/users/soundcloud:users:33700067/sounds.rss" />
-  </body>
-</opml>
