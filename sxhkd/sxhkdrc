@@ -32,21 +32,9 @@ super + g ; {1, 2, 3}
 alt + shift + l
 	slock
 
-# open Brave
-ctrl + alt + b
-	brave
-
-# open Librewolf
-ctrl + shift + b
-	librewolf
-
-# run dmenu
-super + d
-	dmenu_run
-
-# run passemu
-super + shift + d
-	passmenu2
+# dmenu based applications
+super + d ; {1, 2}
+	{dmenu_run, passmenu2}
 
 # -- Screenshots -- #
 
@@ -79,10 +67,10 @@ shift + F3
 	pulsemixer --change-volume +5
 
 XF86AudioMicMute
-	pulsemixer --id source-1 --toggle-mute
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 shift + F4
-	pulsemixer --id source-1 --toggle-mute
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 shift + F5
 	mpc stop
@@ -170,7 +158,7 @@ super + {h,j,k,l}
 	bspc node -f {west, south, north, east}
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }a
+alt + Tab
 	bspc node -f {next,prev}.local.!hidden.window
 
 # expand a node by moving two of its side outward

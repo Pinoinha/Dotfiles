@@ -1,0 +1,198 @@
+#!/bin/env bash
+
+# Simple X Hotkey Daemon config
+
+# -- WM-indepedent commands -- #
+
+# reload sxhkd
+super + r
+	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+
+# spawn terminal
+super + Return
+	$TERMINAL
+
+# spawn vim
+super + v
+	$TERMINAL -e 'nvim'
+
+# run terminal applications
+super + e ; {1, 2, 3, 4, 5, 6}
+	$TERMINAL -e {lf, ncmpcpp, ncspot, newsboat, htop, pulsemixer}
+
+# run graphical applications
+super + g ; {1, 2, 3}
+	{brave, librewolf, galculator}
+
+# lock the screen
+alt + shift + l
+	slock
+
+# dmenu based applications
+super + d ; {1, 2}
+	{dmenu_run, passmenu2}
+
+# -- Screenshots -- #
+
+# print selection with scrot
+@Print
+	scrot -s -f '%Y-%m-%d_$wx$h.png' -e 'mv $f /home/math/Imagens/Prints'
+
+# print current window with scrot
+shift + @Print
+	scrot -u "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
+
+# print entire screen with scrot
+alt + @Print
+	scrot "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
+
+# -- Audio Control -- #
+
+XF86AudioMute
+	pulsemixer --toggle-mute
+
+shift + F1
+	pulsemixer --toggle-mute
+
+XF86AudioLowerVolume
+	pulsemixer --change-volume -5
+
+shift + F2
+	pulsemixer --change-volume -5
+
+XF86AudioRaiseVolume
+	pulsemixer --change-volume +5
+
+shift + F3
+	pulsemixer --change-volume +5
+
+XF86AudioMicMute
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+shift + F4
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+shift + F5
+	mpc stop
+
+XF86AudioPrev
+	mpc prev
+
+shift + F6
+	mpc prev
+
+XF86AudioPlay
+	mpc toggle
+
+shift + F7
+	mpc toggle
+
+XF86AudioNext
+	mpc next
+
+shift + F8
+	mpc next
+	
+# -- Brightness Control -- #
+
+XF86MonBrightnessDown
+	xbacklight -dec 10
+
+shift + F11
+	xbacklight -dec 10
+
+XF86MonBrightnessUp
+	xbacklight -inc 10
+
+shift + F12
+	xbacklight -inc 10
+
+# -- Herbstluftwm Specific -- #
+
+# quit hlwm
+super + alt + q	
+	herbstclient quit
+
+# reload hlwm
+super + shift + r	
+	herbstclient reload
+
+# --- Window Control --- #
+
+# closes focused window or frame
+super + shift + w
+	herbstclient close_or_remove
+
+# focus window in chosen direction
+super + {h, j, k, l}
+	herbstclient focus {left, down, up, right}
+
+# alternates to previous/next window
+alt + {_, shift} + Tab
+	herbstclient cycle_all +1
+
+# toggle focused window as floating
+super + space
+	herbstclient set_attr clients.focus.floating toggle
+
+# toggle focused window as fullscreen
+super + f
+	herbstclient fullscreen toggle
+
+# toggle focused window as pseudotile
+super + shift + t
+	herbstclient pseudotile toggle
+
+# moves windows in floating and tiling mode
+# note: in tiling, it moves the focused \
+# window between frames, or swaps it with \
+# the existing window in the selected direction
+super + shift + {h, j, k, l}
+	herbstclient shift {left, down, up, right}
+
+# hides/minimizes window
+# note: the unminimization is achieved by \
+# super + shift + b, and its code is \
+#available at "$HOME/.config/herbstluftwm/autostart"
+super + b
+	herbstclient set_attr clients.focus.minimized toggle
+
+# -- Tag control -- #
+
+# cycle through tags
+super + {bracketleft, bracketright}
+	herbstclient use_index {-1, +1} --skip-visible
+
+# switch to last visited tag
+super + Tab
+	herbstclient use_previous
+
+# switch to tag
+super + {1-6}
+	herbstclient use {1-6}
+
+# send window to tag
+super + shift + {1-6}
+	herbstclient move {1-6}
+
+# send window to previous/next tag \
+# and switch to tag
+super + shift + {bracketleft, bracketright}
+	herbstclient move_index {-1, +1} --skip-visible
+
+# -- Frame controls -- #
+
+# split frame horizontally/vertically
+super + {_, shift} + s
+	herbstclient split {bottom, right} 0.5
+
+# split-explode focused frame
+# note: equivalent to creating \
+# two nodes in a tree
+super + ctrl + s
+	herbstclient split explode
+
+# resize frames and floating windows
+super + ctrl + {h, j, k, l}
+	herbstclient resize {left, up, down, right} 0.01
+
