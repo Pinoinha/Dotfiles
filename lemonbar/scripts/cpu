@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# checks the amount of CPU being used
+
+cpu() {
+	cpu=$()
+	
+	echo "﬙ $cpu"
+}
+
+cpu

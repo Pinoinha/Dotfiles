@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# prints CPU temperature
+
+temp() {
+	temp=$(sensors | awk '(NR==4) { print $3 }' | sed -e 's/+//g')
+	
+	echo " $temp"
+}
+
+temp

@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# prints the battery status to the stdout
+
+batt() {
+	batt=$(acpi | awk '{print $4}' | sed -e 's/%,//g')
+	
+	echo " $batt"
+}
+
+batt

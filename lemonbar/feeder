@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+# feeds the info to lemonbar
+
+dir="$HOME/.config/lemonbar/"
+
+while true; do
+	info=$("$dir/info")
+
+	echo "$info"
+	sleep 0.01
+done

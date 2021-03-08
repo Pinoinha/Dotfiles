@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# prints the current time
+
+clock() {
+	time=$(date '+%H:%M')
+	
+	echo " $time"
+}
+
+clock

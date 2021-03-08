@@ -1,0 +1,14 @@
+#!/bin/env bash
+
+# sends available memory to stdout
+
+mem() {
+	free=$(free -h | awk ' (NR==2) { print $3 }' | sed -e 's/Gi//g')
+	total=$(free -h | awk ' (NR==2) { print $2 }' | sed -e 's/Gi//g')
+	
+	percentage=$free
+	
+	echo " $percentage"
+}
+
+mem

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+zscroll --before-text "ﱘ  No current song playing" --delay 0.3 \
+		--match-command "mpc status" \
+		--match-text "playing" "--before-text 'ﱘ '" \
+		--match-text "paused" "--before-text ' ' --scroll 0" \
+		--newline=true \
+		--length=30 \
+		--scroll=true \
+		--update-check true "mpc current" &
+
+wait

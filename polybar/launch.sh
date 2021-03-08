@@ -9,7 +9,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch Polybar, using default config location ~/.config/polybar/config
 polybar -r topo &
 polybar -r baixo &
-polybar -r tray &
+#polybar -r tray &
 polybar -r mpd &
 
 echo "Polybar launched..."

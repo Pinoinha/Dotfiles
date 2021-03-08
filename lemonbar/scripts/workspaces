@@ -1,0 +1,34 @@
+#!/bin/env bash
+
+# prints window manager's tags/desktops
+
+# shamelessly copied from:
+# https://gist.github.com/olmokramer/b28ff8ed5fd366e3ebb23b79915ec850
+# there are some alterations, though
+
+print_tags() {
+	for tag in $(herbstclient tag_status); do
+		name=${tag#?}
+		state=${tag%$name}
+
+		case "$state" in
+		'#')
+			printf '%%{B#3f3f3f}%%{F#ffffff} %s %%{F}%%{B}' "$name"
+			;;
+		'+')
+			printf '%%{F#ffffff}%%{R} %s %%{R}%%{F}' "$name"
+			;;
+		'!')
+			printf '%%{R} %s! %%{R}' "$name"
+			;;
+		'.')
+			printf '%%{F#8b8b8b} %s %%{F}' "$name"
+			;;
+		*)
+			printf ' %s ' "$name"
+		esac
+	done
+	printf '\n'
+}
+
+print_tags

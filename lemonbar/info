@@ -1,0 +1,27 @@
+#!/bin/env bash
+
+prefix="$HOME/.config/lemonbar/scripts"
+
+# inspired by:
+# https://raw.githubusercontent.com/onespaceman/dotfiles/158a49ab84b92e9653b476b5964e71d411e49ecc/lemonbar/.config/lemonbar/bar
+
+# source the colors
+. "$HOME/.config/colors"
+
+clock="%{U${red}}$("$prefix/clock")"
+batt="%{U${red}}$("$prefix/batt")"
+cpu="%{U${yellow}}$("$prefix/cpu")"
+mem="%{U${blue}}$("$prefix/mem")"
+pkgs="%{U${blue}}$("$prefix/pkgs")"
+workspaces="%{U${red}}$("$prefix/workspaces")"
+temp="%{U${pink}}$("$prefix/temp")"
+title="%{U${green}}"
+vol="%{U${pink}}$("$prefix/volume")%"
+wlan="%{U${yellow}}$("$prefix/wlan")"
+
+sep="%{U${black}}"
+
+echo -e "%{+u} %{l} ${sep} ${batt} ${sep} ${mem} ${sep} ${cpu} ${sep} ${temp} \
+				%{c} ${workspaces} \
+				%{r} ${vol} ${sep} ${wlan} ${sep} ${pkgs} ${sep} ${clock} ${sep} \
+				%{-u}"

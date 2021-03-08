@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# prints the number of current installed packages (pacman-based)
+
+pkgs() {
+	pkgs=$(pacman -Q | wc -l)
+	
+	echo " $pkgs"
+}
+
+pkgs

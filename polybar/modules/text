@@ -1,4 +1,0 @@
-#!/bin/env bash
-
-# Polybar module that simply prints empty text
-echo "0"

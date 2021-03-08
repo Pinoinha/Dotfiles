@@ -1,0 +1,6 @@
+#!/bin/env bash
+
+icons="     "
+tag_num=$(herbstclient tag_status | awk '{print $NF}' | sed -e 's/')
+
+for i in {1..}
