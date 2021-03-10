@@ -1,27 +1,146 @@
 #!/bin/env bash
 
-prefix="$HOME/.config/lemonbar/scripts"
-
 # inspired by:
 # https://raw.githubusercontent.com/onespaceman/dotfiles/158a49ab84b92e9653b476b5964e71d411e49ecc/lemonbar/.config/lemonbar/bar
 
 # source the colors
 . "$HOME/.config/colors"
 
-clock="%{U${red}}$("$prefix/clock")"
-batt="%{U${red}}$("$prefix/batt")"
-cpu="%{U${yellow}}$("$prefix/cpu")"
-mem="%{U${blue}}$("$prefix/mem")"
-pkgs="%{U${blue}}$("$prefix/pkgs")"
-workspaces="%{U${red}}$("$prefix/workspaces")"
-temp="%{U${pink}}$("$prefix/temp")"
-title="%{U${green}}"
-vol="%{U${pink}}$("$prefix/volume")%"
-wlan="%{U${yellow}}$("$prefix/wlan")"
+# --- Functions --- #
 
-sep="%{U${black}}"
+# prints the battery status to the stdout
 
-echo -e "%{+u} %{l} ${sep} ${batt} ${sep} ${mem} ${sep} ${cpu} ${sep} ${temp} \
-				%{c} ${workspaces} \
-				%{r} ${vol} ${sep} ${wlan} ${sep} ${pkgs} ${sep} ${clock} ${sep} \
-				%{-u}"
+batt() {
+	batt=$(acpi | awk '{print $4}' | sed -e 's/%,//g')
+	icon=""
+
+	[ "$batt" -ge 98 ] && icon="" 
+
+	[ "$batt" -le 50 ] && icon="" 
+	
+	[ "$batt" -le 20 ] && icon="" 
+	
+	[ "$batt" -le 5 ] && icon="" 
+
+	printf "%s %d" "$icon" "$batt"
+}
+
+# prints the current time
+
+clock() {
+	time=$(date '+%H:%M')
+	
+	printf "%s %s" "" "$time"
+}
+
+# checks the amount of CPU being used
+
+cpu() {
+	cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
+		<(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))
+	
+	printf "﬙ %.0f%%" "$cpu"
+}
+
+# sends used memory to stdout
+mem() {
+	mem="$(free | grep Mem | awk ' { print $3/$2 * 100 } ')"
+	
+	printf "%s %.0f%%" "" "$mem"
+}
+
+# prints the number of current installed packages (pacman-based)
+pkgs() {
+	pkgs=$(pacman -Q | wc -l)
+	
+	printf "%s %d" "" "$pkgs"
+}
+
+# prints current song playing in mpd
+song(){
+	song=$(mpc current)
+
+	printf "%%{B#101112}%%{U#6EF38B} %s %%{U-}%%{B-}" "$song"
+}
+
+# prints temperature
+temp() {
+	temp=$(sensors | awk '(NR==4) { print $3 }' | sed -e 's/+//g')
+	
+	printf "%s %dºC" "" "$temp"
+}
+
+# prints window title
+title(){
+	title=$(xdotool getwindowfocus getwindowname)
+
+	printf "%.10s" "$title"
+}
+
+# prints volume from pulseaudio
+vol() {
+	vol=$(pulsemixer --get-volume | awk ' { print $2 } ')
+	mute=$(pulsemixer --get-mute)
+	
+	icon="" 
+	
+	# if muted
+	[ $mute -eq 1 ] || [ $vol -eq 0 ] && icon="" && vol="mute"
+	
+	printf "%s %d%%" "$icon" "$vol"
+}
+
+# prints connected SSID name
+wlan() {
+	wlan=$(iwgetid | awk ' {print $2, $3, $4, $5, $6} ' | sed -e 's/ESSID://g' -e 's/"//g')
+	
+	printf "%s %s" "" "$wlan"
+}
+
+# prints hlwm's tag names
+print_tags() {
+	for tag in $(herbstclient tag_status); do
+		name=${tag#?}
+		state=${tag%$name}
+
+		case "$state" in
+		'#')
+			printf '%%{B#656565}%%{F#ffffff}%%{U#e60053} %s %%{U-}%%{F-}%%{B-}' "$name"
+			;;
+		'+')
+			printf '%%{U#101112}%%{F#ffffff}%%{R} %s %%{U-}%%{R-}%%{F-}' "$name"
+			;;
+		'!')
+			printf '%%{U#101112}%%{R} %s! %%{R-}%%{U-}' "$name"
+			;;
+		'.')
+			printf '%%{U#101112}%%{F#8b8b8b} %s %%{F-}%%{U-}' "$name"
+			;;
+		*)
+			printf '%%{U#101112} %s %%{U-}' "$name"
+		esac
+	done
+	printf '\n'
+}
+
+# --- Formatting --- #
+
+# underline formatting
+clock="%{U${red}}$(clock)%{U-}"
+batt="%{U${red}}$(batt)%{U-}"
+cpu="%{U${yellow}}$(cpu)%%{U-}"
+mem="%{U${blue}}$(mem)%%{U-}"
+pkgs="%{U${blue}}$(pkgs)%{U-}"
+workspaces="$(print_tags)"
+temp="%{U${pink}}$(temp)%{U-}"
+title="%{U${green}}$(title)%{U-}"
+vol="%{U${pink}}$(vol)%%{U-}"
+wlan="%{U${yellow}}$(wlan)%{U-}"
+
+# separator string
+sep="%{U${black}}  "
+ 
+# --- Return --- #
+echo -e "%{l}${sep}${batt}${sep}${mem}${sep}${cpu}${sep}${temp}\
+				%{c}${workspaces}\
+				%{r}${vol}${sep}${wlan}${sep}${pkgs}${sep}${clock}${sep}"

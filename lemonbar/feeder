@@ -2,11 +2,11 @@
 
 # feeds the info to lemonbar
 
-dir="$HOME/.config/lemonbar/"
+dir="$(dirname $0)"
 
 while true; do
 	info=$("$dir/info")
 
-	echo "$info"
-	sleep 0.01
+	printf "%s" "$info"
+	sleep 1
 done

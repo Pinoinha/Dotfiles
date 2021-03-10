@@ -3,27 +3,20 @@
 # uses lemonbar as the panel
 
 # kills running lemonbar instances
-killall -q lemonbar
+pgrep -x lemonbar && killall -q lemonbar
 
 dir=$(dirname $0)
-font="-adobe-courier-medium-r-*-*-18-*-*-*-*-*-*-*"
 
+# display options
+font="-adobe-courier-medium-r-*-*-18-*-*-*-*-*-*-*"
 dimensions=1904x30+8+4
 
-# barra do topo
-bash "$dir/feeder" | lemonbar -dp \
+# piping the info to the bar itself
+. "$dir/feeder" | lemonbar -dp \
 	-g ${dimensions} \
 	-f ${font} \
 	-f "Symbols Nerd Font"	\
 	-F "#dfdfdf" \
 	-B "#101112" \
-	-u 3
-
-# barra mpd
-bash "$dir/scripts/mpd_scroll" | lemonbar -bpd \
-																					-g 200x30+8+4 \
-																					-f ${font} \
-																					-B "#101112" \
-																					-F "#ffffff" \
-																					-U "#6EF38B" \
-																					-u 3
+	-u 3 \
+	&
