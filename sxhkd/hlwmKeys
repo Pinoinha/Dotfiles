@@ -6,11 +6,11 @@
 
 # reload sxhkd
 super + r
-	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+	pkill -USR1 -x sxhkd ; notify-send 'sxhkd' 'Reloaded config'
 
-# spawn terminal
+# spawn terminal in a new frame
 super + Return
-	$TERMINAL
+	frame_spawn $TERMINAL
 
 # spawn vim
 super + v
@@ -30,7 +30,7 @@ alt + shift + l
 
 # dmenu based applications
 super + d ; {1, 2}
-	{dmenu_run, passmenu2}
+	{dmenu_run -l 6, passmenu2}
 
 # -- Screenshots -- #
 
@@ -119,9 +119,13 @@ super + shift + r
 
 # --- Window Control --- #
 
-# closes focused window or frame
+# closes focused window
 super + shift + w
-	herbstclient close_or_remove
+	herbstclient close
+
+# closes focused window and its frame
+super + ctrl + w
+	herbstclient close_and_remove
 
 # focus window in chosen direction
 super + {h, j, k, l}
@@ -131,9 +135,9 @@ super + {h, j, k, l}
 alt + {_, shift} + Tab
 	herbstclient cycle_all +1
 
-# toggle focused window as floating
+# toggle focused window as floating and center it on the screen
 super + space
-	herbstclient set_attr clients.focus.floating toggle
+	herbstclient set_attr clients.focus.floating toggle; wmMove center
 
 # toggle focused window as fullscreen
 super + f
@@ -156,6 +160,10 @@ super + shift + {h, j, k, l}
 #available at "$HOME/.config/herbstluftwm/autostart"
 super + b
 	herbstclient set_attr clients.focus.minimized toggle
+
+# centers focused floating window with the wmMove script
+super + c
+	wmMove center
 
 # -- Tag control -- #
 

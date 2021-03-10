@@ -1,3 +1,9 @@
+# --- Configurations --- #
+
+set hidden true
+set icons on
+set preview on
+
 # interpreter for shell commands (needs to be POSIX compatible)
 set shell sh
 
@@ -20,21 +26,9 @@ set ifs "\n"
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
-# use enter for shell commands
-map <enter> shell
+# --- Functions --- #
 
-# execute current file (must be executable)
-map x $$f
-map X !$f
-
-# dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
-
-# define a custom 'open' command
-# This command is called when current file is not a directory. You may want to
-# use either file extensions and/or mime types here. Below uses an editor for
-# text files and a file opener for the rest.
+# file opener; will use mimetypes when available, else open in editor
 cmd open ${{
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $f;;
@@ -42,16 +36,8 @@ cmd open ${{
     esac
 }}
 
-# define a custom 'rename' command without prompt for overwrite
-# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-# map r push :rename<space>
-
-# make sure trash folder exists
-# %mkdir -p ~/.trash
-
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
+# trash-cli intregration
+cmd trash %trash-put $fx
 
 # define a custom 'delete' command
 cmd delete ${{
@@ -62,9 +48,6 @@ cmd delete ${{
     [ $ans = "y" ] && rm -rf $fx
 }}
 
-# use '<delete>' key for either 'trash' or 'delete' command
-# map <delete> trash
-map D delete
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -127,14 +110,46 @@ cmd bulk-rename ${{
 	rm $index $index_edit
 }}
 
+# create a new directory
+cmd mkdir ${{
+	read name
+	%mkdir "$name"
+	reload
+}}
+
+# --- Mappings --- #
+
+# unset zh 
+map zh
+
+# bulk rename selected
 map br bulk-rename
 
+# open file in nvim
 map e $nvim $f
 
+# reload the cache
 map R reload
 
-# settings
-set hidden true
-set icons on
-set previewer ~/.config/lf/previewer.sh
-set cleaner ~/.config/lf/clear_img.sh
+# remap set hidden to '.'
+map . set hidden!
+
+# send to trash
+map t trash
+
+# delete folder or file
+map D delete
+
+# use enter for shell commands
+map <enter> shell
+
+# mkdir
+map md mkdir
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+# dedicated keys for file opener actions
+map o &mimeopen $f
+map O $mimeopen --ask $f

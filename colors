@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+black=#101112
+white=#dfdfdf
+bright_white=#ffffff
+gray=#3f3f3f
+red=#e60053
+blue=#799df6
+yellow=#fbdd91
+pink=#f985e0
+green=#6EF38B 

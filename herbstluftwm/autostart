@@ -10,7 +10,7 @@ hc emit_hook reload
 
 # adiciona padding nas bordas do monitor
 #			 monitor	cima|direita|baixo|esquerda
-hc pad 0  40 		4 		 40 		4
+hc pad 		0  		 40 		4 		 40 		4
 
 # inicializa o sxhkd com a configuração do hlwm
 pgrep -x sxhkd > /dev/null || sxhkd -c "$HOME/.config/sxhkd/hlwmKeys" &
@@ -66,11 +66,11 @@ hc set smart_window_surroundings off
 hc set smart_frame_surroundings on
 hc set mouse_recenter_gap 0
 
-# rules
+# --- Rules --- #
 hc unrule -F
 #hc rule class=XTerm tag=3 # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
-hc rule floatplacement=smart
+hc rule floatplacement=center
 
 # give focus to terminal
 hc rule class~'Alacritty' focus=on
@@ -79,19 +79,20 @@ hc rule class~'Alacritty' focus=on
 hc rule class=Brave-browser tag=6
 hc rule class=LibreWolf tag=6
 hc rule class=Luakit tag=6
-hc rule class=TelegramDesktop tag=5 floating=on
+hc rule class=TelegramDesktop tag=5 floating=on 
 hc rule class=zoom tag=5
 hc rule class=Steam tag=4
 hc rule class=Lutris tag=4
 hc rule class=dishonored.exe tag=4
-hc rule class=Sxiv floating=on
-hc rule class=mpv floating=on
-hc rule class=Iwgtk floating=on
+hc rule class=Sxiv floating=on 
+hc rule class=mpv floating=on 
+hc rule class=Zathura floating=on 
+hc rule class=Iwgtk floating=on 
 hc rule class=lightcord tag=5
 hc rule class=Virt-manager tag=4
 hc rule class=Pcmanfm tag=2
 hc rule class=obs tag=4
-hc rule class=Galculator floating=on
+hc rule class=Galculator floating=on 
 
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
@@ -101,9 +102,6 @@ hc set tree_style '╾│ ├└╼─┐'
 
 # unlock, just to be sure
 hc unlock
-
-# Lança o polybar, e reinicia-o quando o herbstluftwm é reiniciado
-bash .config/polybar/launch.sh
 
 # Unminimizes all minimized windows
 hc keybind $Mod-Shift-b mktemp bool ISMINATT chain \
@@ -118,3 +116,6 @@ hc keybind $Mod-Shift-b mktemp bool ISMINATT chain \
    . and \
      , compare ISMINATT "=" false \
      , set_attr clients.focus.minimized true
+
+# Lança o lemonbar, e reinicia-o quando o herbstluftwm é reiniciado
+bash "$HOME/.config/lemonbar/launch"
