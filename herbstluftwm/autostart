@@ -10,7 +10,7 @@ hc emit_hook reload
 
 # adiciona padding nas bordas do monitor
 #			 monitor	cima|direita|baixo|esquerda
-hc pad 		0  		 40 		4 		 40 		4
+hc pad 		0  		 40 		4 		 10 		4
 
 # inicializa o sxhkd com a configuração do hlwm
 pgrep -x sxhkd > /dev/null || sxhkd -c "$HOME/.config/sxhkd/hlwmKeys" &
@@ -19,7 +19,8 @@ pgrep -x sxhkd > /dev/null || sxhkd -c "$HOME/.config/sxhkd/hlwmKeys" &
 hc set default_frame_layout 1
 
 # tags
-tag_names=( {1..6} )
+#tag_names=( {1..6} )
+tag_names=( "" "" "" "切" "" )
 hc rename default "${tag_names[0]}" || true
 for i in "${!tag_names[@]}" ; do
     hc add "${tag_names[$i]}"
@@ -76,22 +77,20 @@ hc rule floatplacement=center
 hc rule class~'Alacritty' focus=on
 
 # open applications in specific tags
-hc rule class=Brave-browser tag=6
-hc rule class=LibreWolf tag=6
-hc rule class=Luakit tag=6
-hc rule class=TelegramDesktop tag=5 floating=on 
-hc rule class=zoom tag=5
-hc rule class=Steam tag=4
-hc rule class=Lutris tag=4
-hc rule class=dishonored.exe tag=4
+hc rule class=firefoxdeveloperedition tag=
+hc rule class=LibreWolf tag=
+hc rule class=Chromium tag=
+hc rule class=TelegramDesktop tag=切 floating=on 
+hc rule class=zoom tag=切
+hc rule class=Steam tag= floating=on
+hc rule class=dishonored.exe tag=
 hc rule class=Sxiv floating=on 
 hc rule class=mpv floating=on 
 hc rule class=Zathura floating=on 
 hc rule class=Iwgtk floating=on 
-hc rule class=lightcord tag=5
-hc rule class=Virt-manager tag=4
-hc rule class=Pcmanfm tag=2
-hc rule class=obs tag=4
+hc rule class=lightcord tag=切
+hc rule class=Virt-manager tag=
+hc rule class=obs tag=
 hc rule class=Galculator floating=on 
 
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on

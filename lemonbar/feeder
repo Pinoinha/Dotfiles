@@ -9,4 +9,4 @@ while true; do
 
 	printf "%s" "$info"
 	sleep 1
-done
+done &

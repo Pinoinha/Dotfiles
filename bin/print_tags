@@ -1,0 +1,29 @@
+#!/bin/env bash
+
+# prints hlwm's tag names
+print_tags() {
+	for tag in $(herbstclient tag_status); do
+		name=${tag#?}
+		state=${tag%$name}
+
+		case "$state" in
+		'#')
+			printf '%%{B#656565}%%{F#ffffff}%%{U#e60053} %s %%{U-}%%{F-}%%{B-}' "$name"
+			;;
+		'+')
+			printf '%%{U#101112}%%{F#ffffff}%%{R} %s %%{R-}%%{U-}%%{F-}' "$name"
+			;;
+		'!')
+			printf '%%{R} %s! %%{R-}' "$name"
+			;;
+		'.')
+			printf '%%{U#101112}%%{F#8b8b8b} %s %%{F-}%%{U-}' "$name"
+			;;
+		*)
+			printf '%%{U#101112} %s %%{U-}' "$name"
+		esac
+	done
+	printf '\n'
+}
+
+print_tags

@@ -1,0 +1,32 @@
+#!/bin/env sh
+
+# copied from: 
+# https://www.reddit.com/r/herbstluftwm/comments/j4oq4k/does_anyone_know_how_i_could_allign_a_frame_to/gaejwks/?utm_source=reddit&utm_medium=web2x&context=3
+
+# get current window id, width and height
+WID="$(pfw)"
+WW="$(wattr w "$WID")"
+WH="$(wattr h "$WID")"
+
+# get screen width and height
+ROOT="$(lsw -r)"
+SW="$(wattr w "$ROOT")"
+SH="$(wattr h "$ROOT")"
+
+case $1 in
+  center)
+    xdotool getactivewindow windowmove "$(((SW - WW)/2))" "$(((SH - WH)/2))"
+    ;;
+  all-top)
+    xdotool getactivewindow windowmove                  x 0
+    ;;
+  half-top)
+    xdotool getactivewindow windowmove                  x "$((SH - WH))"
+    ;;
+  all-left)
+    xdotool getactivewindow windowmove                  0 y
+    ;;
+  half-left)
+    xdotool getactivewindow windowmove     "$((SW - WW))" y
+    ;;
+esac

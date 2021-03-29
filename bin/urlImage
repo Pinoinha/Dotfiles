@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Pipe images from URLs into sxiv
+
+# get image extension
+EXT="${1##*.}"
+
+# download it into a tmp file
+wget "$1" -O /tmp/img.$EXT
+
+# open in sxiv
+sxiv /tmp/img.$EXT

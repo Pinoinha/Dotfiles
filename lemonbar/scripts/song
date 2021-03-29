@@ -1,0 +1,8 @@
+#!/bin/env bash
+
+# prints current song playing in mpd
+song(){
+	song="$(mpc current)"
+
+	printf "%%{B#101112}%%{U#6EF38B} %s %%{U-}%%{B-}" "$song"
+}

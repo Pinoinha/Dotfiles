@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+sleep 1
+DISPLAY=":0.0"
+HOME=/home/math/
+XAUTHORITY=$HOME/.Xauthority
+export DISPLAY XAUTHORITY HOME
+
+kb_id=`xinput -list | grep -i 'sino wealth' | grep -o id=[0-9]. | grep -o [0-9]. | head -1`
+
+xset r rate 250 40
+setxkbmap -model abnt2 -layout br -variant abnt2 
+xmodmap "/home/math/.Xmodmap"

@@ -11,7 +11,7 @@
 # prints the battery status to the stdout
 
 batt() {
-	batt=$(acpi | awk '{print $4}' | sed -e 's/%,//g')
+	batt="$(acpi | awk '{print $4}' | sed -e 's/,//g')"
 	icon=""
 
 	[ "$batt" -ge 98 ] && icon="" 
@@ -22,13 +22,13 @@ batt() {
 	
 	[ "$batt" -le 5 ] && icon="" 
 
-	printf "%s %d" "$icon" "$batt"
+	printf "%s %d%%" "$icon" "$batt"
 }
 
 # prints the current time
 
 clock() {
-	time=$(date '+%H:%M')
+	time="$(date '+%H:%M')"
 	
 	printf "%s %s" "" "$time"
 }
@@ -36,8 +36,8 @@ clock() {
 # checks the amount of CPU being used
 
 cpu() {
-	cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
-		<(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))
+	cpu="$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
+		<(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))"
 	
 	printf "﬙ %.0f%%" "$cpu"
 }
@@ -51,48 +51,48 @@ mem() {
 
 # prints the number of current installed packages (pacman-based)
 pkgs() {
-	pkgs=$(pacman -Q | wc -l)
+	pkgs="$(pacman -Q | wc -l)"
 	
 	printf "%s %d" "" "$pkgs"
 }
 
 # prints current song playing in mpd
 song(){
-	song=$(mpc current)
+	song="$(mpc current)"
 
 	printf "%%{B#101112}%%{U#6EF38B} %s %%{U-}%%{B-}" "$song"
 }
 
 # prints temperature
 temp() {
-	temp=$(sensors | awk '(NR==4) { print $3 }' | sed -e 's/+//g')
+	temp="$(sensors | grep -i package | awk '{print $4}' | sed -e 's/+//g')"
 	
 	printf "%s %dºC" "" "$temp"
 }
 
 # prints window title
 title(){
-	title=$(xdotool getwindowfocus getwindowname)
+	title="$(xdotool getwindowfocus getwindowname)"
 
 	printf "%.10s" "$title"
 }
 
 # prints volume from pulseaudio
 vol() {
-	vol=$(pulsemixer --get-volume | awk ' { print $2 } ')
-	mute=$(pulsemixer --get-mute)
+	vol="$(pulsemixer --get-volume | awk ' { print $2 } ')"
+	mute="$(pulsemixer --get-mute)"
 	
 	icon="" 
 	
 	# if muted
-	[ $mute -eq 1 ] || [ $vol -eq 0 ] && icon="" && vol="mute"
-	
+	[ "$mute" -eq 1 ] || [ "$vol" -eq 0 ] && icon="" && vol=0
+		
 	printf "%s %d%%" "$icon" "$vol"
 }
 
 # prints connected SSID name
 wlan() {
-	wlan=$(iwgetid | awk ' {print $2, $3, $4, $5, $6} ' | sed -e 's/ESSID://g' -e 's/"//g')
+	wlan="$(iwgetid | awk ' {print $2, $3, $4, $5, $6} ' | sed -e 's/ESSID://g' -e 's/"//g' -e 's/ //g')"
 	
 	printf "%s %s" "" "$wlan"
 }
@@ -108,10 +108,10 @@ print_tags() {
 			printf '%%{B#656565}%%{F#ffffff}%%{U#e60053} %s %%{U-}%%{F-}%%{B-}' "$name"
 			;;
 		'+')
-			printf '%%{U#101112}%%{F#ffffff}%%{R} %s %%{U-}%%{R-}%%{F-}' "$name"
+			printf '%%{U#101112}%%{F#ffffff}%%{R} %s %%{R-}%%{U-}%%{F-}' "$name"
 			;;
 		'!')
-			printf '%%{U#101112}%%{R} %s! %%{R-}%%{U-}' "$name"
+			printf '%%{R} %s! %%{R-}' "$name"
 			;;
 		'.')
 			printf '%%{U#101112}%%{F#8b8b8b} %s %%{F-}%%{U-}' "$name"
@@ -127,7 +127,7 @@ print_tags() {
 
 # underline formatting
 clock="%{U${red}}$(clock)%{U-}"
-batt="%{U${red}}$(batt)%{U-}"
+batt="%{U${red}}$(batt)%%{U-}"
 cpu="%{U${yellow}}$(cpu)%%{U-}"
 mem="%{U${blue}}$(mem)%%{U-}"
 pkgs="%{U${blue}}$(pkgs)%{U-}"
@@ -141,6 +141,6 @@ wlan="%{U${yellow}}$(wlan)%{U-}"
 sep="%{U${black}}  "
  
 # --- Return --- #
-echo -e "%{l}${sep}${batt}${sep}${mem}${sep}${cpu}${sep}${temp}\
+echo -e "%{+u}%{l}${sep}${batt}${sep}${mem}${sep}${cpu}${sep}${temp}\
 				%{c}${workspaces}\
-				%{r}${vol}${sep}${wlan}${sep}${pkgs}${sep}${clock}${sep}"
+				%{r}${vol}${sep}${wlan}${sep}${pkgs}${sep}${clock}${sep}%{-u}"

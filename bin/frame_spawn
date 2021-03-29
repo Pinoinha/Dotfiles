@@ -1,0 +1,18 @@
+#!/bin/env bash
+
+# Based on:
+# https://github.com/herbstluftwm/herbstluftwm/issues/1164
+
+
+# The script compares the number of opened windows in the focused tiling frame, and then compares:
+# 1) If the frame is not empty (!= 0), then it wll be split vertically by a ratio of 0.5 \
+# and the application will be opened in the new, empty frame
+# 2) If the frame is empty, then the application will simply be spawned on it.
+
+herbstclient \
+  chain \
+		, and \
+				: compare tags.focus.tiling.focused_frame.client_count != 0 \
+				: split auto \
+		, rule once index=e focus=on \
+		, spawn "$1"

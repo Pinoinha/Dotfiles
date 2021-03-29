@@ -1,0 +1,16 @@
+#!/bin/env bash
+
+# prints volume from pulseaudio
+vol() {
+	vol="$(pulsemixer --get-volume | awk ' { print $2 } ')"
+	mute="$(pulsemixer --get-mute)"
+	
+	icon="" 
+	
+	# if muted
+	[ "$mute" -eq 1 ] || [ "$vol" -eq 0 ] && icon="" && vol=0
+		
+	printf "%s %d%%" "$icon" "$vol"
+}
+
+vol

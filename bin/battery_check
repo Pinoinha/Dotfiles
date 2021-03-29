@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Simple script to monitor the battery's status 
+
+# calls batt_status script
+batt=$(acpi | awk '{print $4}' | sed -e 's/\%,//g')
+state=$(acpi | awk '{print  }' | sed -e 's/\,//g')
+
+if [[ $batt -ge 99 ]]; then
+	notify-send "Bateria" "Completamente carregada! (100%)"
+elif [[ $batt -eq 20 ]] ; then
+	notify-send "Bateria descarregando" "Nível de bateria alcançou 20%"
+elif [[ $batt -eq 10 ]] ; then
+	notify-send "Bateria descarregando" "Nível de bateria alcançou 10%"
+elif [[ $batt -le 5 ]]; then
+	notify-send "Bateria crítica!" "Nível de bateria alcançou 5%"
+fi

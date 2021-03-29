@@ -12,6 +12,10 @@ super + r
 super + Return
 	frame_spawn $TERMINAL
 
+# spawn floating state
+super + shift + Return
+	herbstclient chain , rule once index=e focus=on floating=on , spawn $TERMINAL
+
 # spawn vim
 super + v
 	$TERMINAL -e 'nvim'
@@ -21,8 +25,8 @@ super + e ; {1, 2, 3, 4, 5, 6}
 	$TERMINAL -e {lf, ncmpcpp, ncspot, newsboat, htop, pulsemixer}
 
 # run graphical applications
-super + g ; {1, 2, 3}
-	{brave, librewolf, galculator}
+super + g ; {1, 2}
+	{firefox-developer-edition, librewolf}
 
 # lock the screen
 alt + shift + l
@@ -40,7 +44,7 @@ super + d ; {1, 2}
 
 # print current window with scrot
 shift + @Print
-	scrot -u "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
+	scrot -u '%Y-%m-%d_$wx$h.png' -e 'mv $f /home/math/Imagens/Prints'
 
 # print entire screen with scrot
 alt + @Print
@@ -67,10 +71,10 @@ shift + F3
 	pulsemixer --change-volume +5
 
 XF86AudioMicMute
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	mic_check
 
 shift + F4
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	mic_check
 
 shift + F5
 	mpc stop
@@ -176,12 +180,12 @@ super + Tab
 	herbstclient use_previous
 
 # switch to tag
-super + {1-6}
-	herbstclient use {1-6}
+super + {1-5}
+	herbstclient use {"", "", "", "切", ""}
 
 # send window to tag
-super + shift + {1-6}
-	herbstclient move {1-6}
+super + shift + {1-5}
+	herbstclient move {"", "", "", "切", ""}
 
 # send window to previous/next tag \
 # and switch to tag
@@ -195,8 +199,7 @@ super + {_, shift} + s
 	herbstclient split {bottom, right} 0.5
 
 # split-explode focused frame
-# note: equivalent to creating \
-# two nodes in a tree
+# note: equivalent to creating two nodes in a tree
 super + ctrl + s
 	herbstclient split explode
 
