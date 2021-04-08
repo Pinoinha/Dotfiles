@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# script to pipe scanned networks to dmenu, using iwd
+
+station="$(iwctl device list | grep station | awk ' { print $1 } ')"
+
+iwctl station "$station" scan
+
+ssid="$(iwctl station "$station" get-networks | dmenu -l 6 -p "Connect to a network:" | sed -e 's/psk.*$//g' -e 's/^\W*//g' -e 's/\W*$//g')"
+
+[ -v "$ssid" ] && iwctl station "$station" connect "$ssid"; notify-send 'iwctl' "Connected to network $ssid"

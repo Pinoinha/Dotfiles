@@ -21,8 +21,6 @@ alias bashrc='nvim ~/.bashrc'
 
 alias tmconf='nvim ~/.tmux.conf'
 
-alias tconf='nvim ~/.config/termite/config'
-
 alias alconf='nvim ~/.config/alacritty/alacritty.yml'
 
 alias venv='nvim ~/.config/env'
@@ -35,6 +33,10 @@ alias xmap='nvim ~/.Xmodmap'
 alias xhk='nvim ~/.config/sxhkd/sxhkdrc'
 alias bsp='nvim ~/.config/bspwm/bspwmrc'
 alias pbar='nvim ~/.config/polybar/config'
+alias lbar='nvim ~/.config/lemonbar/launch'
+
+alias hlwm='nvim ~/.config/herbstluftwm/autostart'
+alias hlk='nvim ~/.config/sxhkd/hlwmKeys'
 
 alias lfrc='nvim ~/.config/lf/lfrc'
 
@@ -43,6 +45,10 @@ alias nvrc='nvim ~/.config/nvim/init.vim'
 
 alias ncc='nvim ~/.config/ncmpcpp/config'
 alias mpconf='nvim ~/.config/mpd/mpd.conf'
+
+alias muttrc='nvim $HOME/.config/mutt/muttrc'
+
+alias colors='nvim $HOME/.config/colors'
 
 # suckless utilities
 alias dwconf="nvim ~/.local/repos/dwm-meu/config.def.h"
@@ -57,10 +63,19 @@ alias dmcomp='cd ~/.local/repos/dmenu-meu && rm -rf config.h && doas make clean 
 alias slconf="nvim ~/.local/repos/slock-meu/config.def.h"
 alias slcomp='cd ~/.local/repos/slock-meu && rm -rf config.h && doas make clean install && cd'
 
+alias bconf="nvim ~/.local/repos/dwmblocks/blocks.def.h"
+alias bcomp='cd ~/.local/repos/dwmblocks && rm -rf blocks.h && doas make clean install && cd'
+
+alias tbconf="nvim ~/.local/repos/tabbed-meu/config.def.h"
+alias tbcomp='cd ~/.local/repos/tabbed-meu && rm -rf config.h && doas make clean install && cd'
+
+alias spatch="patch -p1 <"
+
 # pacman aliases
 alias p='doas pacman -S'
 alias pss='pacman -Ss'
 alias psi='pacman -Si'
+alias pf='pacman -F'
 alias pi='pacman -Qi'
 alias pl='pacman -Ql'
 alias pr='doas pacman -Rs'
@@ -74,14 +89,18 @@ alias y='yay -S'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit -m'
+alias gl='git log --oneline'
 
 # application aliases
 alias v='nvim'
 alias V='doas nvim'
 alias pm='pulsemixer'
 alias yda='youtube-dl -4 -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
-alias muttrc='nvim $HOME/.config/mutt/muttrc'
 alias xclip='xclip -sel copy'
+alias hc='herbstclient'
+
+# abre o GTA V com facilidade
+alias gtav='legendary launch 9d2d0eb64d5c44529cece33fe2a46482'
 
 # todo.txt
 alias t='todo.sh'

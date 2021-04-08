@@ -3,6 +3,7 @@
 batt() {
 	batt="$(acpi | awk '{print $4}' | sed -e 's/%,//g')"
 	icon=""
+	state="$(cat /sys/class/power_supply/BAT0/status)"
 
 	[ "$batt" -ge 90 ] && icon="" 
 

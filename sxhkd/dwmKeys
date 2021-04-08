@@ -8,95 +8,27 @@
 super + r
 	pkill -USR1 -x sxhkd ; notify-send 'sxhkd' 'Reloaded config'
 
-# spawn vim
-super + v
-	$TERMINAL -e 'nvim'
-
-# run terminal applications
-super + e ; {1, 2, 3, 4, 5, 6}
-	$TERMINAL -e {\
-		lf, \
-		ncmpcpp, \
-		ncspot, \
-		newsboat, \
-		htop, \
-		pulsemixer}
-
-# run graphical applications
-super + g ; {1, 2}
-	{firefox-developer-edition, librewolf}
-
-# lock the screen
-alt + shift + l
-	slock
-
-# dmenu based applications
-super + d ; {1, 2}
-	{dmenu_run -l 6, passmenu2}
-
-# center a floating window
-super + c
-	wmMove center
-
-# -- Screenshots -- #
-
-# print selection with scrot
-@Print
-	scrot -s -f '%Y-%m-%d_$wx$h.png' -e 'mv $f /home/math/Imagens/Prints'
-
-# print current window with scrot
-shift + @Print
-	scrot -u '%Y-%m-%d_$wx$h.png' -e 'mv $f /home/math/Imagens/Prints'
-
-# print entire screen with scrot
-alt + @Print
-	scrot "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
-
 # -- Audio Control -- #
 
 XF86AudioMute
 	pulsemixer --toggle-mute; pkill -RTMIN+10 dwmblocks
 
-shift + F1
-	pulsemixer --toggle-mute; pkill -RTMIN+10 dwmblocks
-
 XF86AudioLowerVolume
-	pulsemixer --change-volume -5; pkill -RTMIN+10 dwmblocks
-
-shift + F2
 	pulsemixer --change-volume -5; pkill -RTMIN+10 dwmblocks
 
 XF86AudioRaiseVolume
 	pulsemixer --change-volume +5; pkill -RTMIN+10 dwmblocks
 
-shift + F3
-	pulsemixer --change-volume +5; pkill -RTMIN+10 dwmblocks
-
 XF86AudioMicMute
 	mic_check
 
-shift + F4
-	mic_check
-
-shift + F5
-	mpc stop
-
 XF86AudioPrev
-	mpc prev
-
-shift + F6
 	mpc prev
 
 XF86AudioPlay
 	mpc toggle
 
-shift + F7
-	mpc toggle
-
 XF86AudioNext
-	mpc next
-
-shift + F8
 	mpc next
 	
 # -- Brightness Control -- #
@@ -104,11 +36,5 @@ shift + F8
 XF86MonBrightnessDown
 	xbacklight -dec 10
 
-shift + F11
-	xbacklight -dec 10
-
 XF86MonBrightnessUp
-	xbacklight -inc 10
-
-shift + F12
 	xbacklight -inc 10

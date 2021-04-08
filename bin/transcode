@@ -3,7 +3,7 @@
 # Este script faz a transcodagem de um vídeo de um codec para outro, feito para reduzir em até 80% o tamanho do arquivo original.
 
 ORIG="$1"
-NOME=$(basename "$ORIG" .mp4)
+NOME="$(basename "$ORIG" .mp4)"
 NOVO="${2:-"$NOME-trans.mp4"}"
 
 ffmpeg -i "$ORIG" -vf mpdecimate -vsync vfr -c:v libx265 -x265-params crf=32 -preset veryslow "$NOVO"
