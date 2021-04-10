@@ -2,8 +2,11 @@
 
 batt() {
 	batt="$(acpi | awk '{print $4}' | sed -e 's/%,//g')"
-	icon=""
 	state="$(cat /sys/class/power_supply/BAT0/status)"
+
+	icon=""
+
+	[ "$batt" -e 98 ] && icon="" 
 
 	[ "$batt" -ge 90 ] && icon="" 
 
@@ -12,6 +15,10 @@ batt() {
 	[ "$batt" -le 20 ] && icon="" 
 	
 	[ "$batt" -le 5 ] && icon="" 
+
+	[ "$state" == "Charging" ] && icon=""
+
+	battery_check "$batt" "$state"
 
 	printf "%s %d%%" "$icon" "$batt"
 }

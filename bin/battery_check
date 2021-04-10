@@ -2,22 +2,17 @@
 
 # Simple script to monitor the battery's status and level
 
-interval=300 # 5 minutes
 critical_level=7
 
-while true
-do
-	batt="$(cat /sys/class/power_supply/BAT0/capacity)"
-	state="$(cat /sys/class/power_supply/BAT0/status)"
-	
-	if [[ $batt -ge 99 ]]; then
-		notify-send -u normal"Bateria" "Completamente carregada! (100%)"; pkill -RTMIN+20 dwmblocks
-	elif [[ $batt -eq 20 ]] ; then
-		notify-send -u normal "Bateria descarregando" "Nível de bateria alcançou 20%"; pkill -RTMIN+20 dwmblocks
-	elif [[ $batt -eq 10 ]] ; then
-		notify-send -u normal "Bateria descarregando" "Nível de bateria alcançou 10%"; pkill -RTMIN+20 dwmblocks
-	elif [[ $batt -le "$critical_level" ]]; then
-		notify-send -u critical "Bateria crítica!" "Nível de bateria alcançou 7%"; pkill -RTMIN+20 dwmblocks
-	fi
-	sleep "$interval"
-done
+batt="$1"
+state="$2"
+
+if [[ $batt -ge 99 ]]; then
+	notify-send -u normal"Bateria" "Completamente carregada! (100%)"; pkill -RTMIN+20 dwmblocks
+elif [[ $batt -eq 20 ]] ; then
+	notify-send -u normal "Bateria descarregando" "Nível de bateria alcançou 20%"; pkill -RTMIN+20 dwmblocks
+elif [[ $batt -eq 10 ]] ; then
+	notify-send -u normal "Bateria descarregando" "Nível de bateria alcançou 10%"; pkill -RTMIN+20 dwmblocks
+elif [[ $batt -le "$critical_level" ]]; then
+	notify-send -u critical "Bateria crítica!" "Nível de bateria alcançou 7%"; pkill -RTMIN+20 dwmblocks
+fi
