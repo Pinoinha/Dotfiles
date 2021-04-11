@@ -1,9 +1,9 @@
-#!/bin/env bash
+#!/bin/env dash
 
 # prints connected SSID name
 wlan() {
 	station="$(iwctl device list | grep station | awk ' { print $1 } ')"
-	essid="$(iwgetid | sed -e 's/ESSID://g' -e 's/"//g' -e "s:$station::g" -e 's/^\W*/ /g')"
+	essid="$(iwgetid | sed -e 's/ESSID://g' -e 's/\"//g' -e "s:$station::g" -e 's/^\W*/ /g')"
 	
 	printf "%s" "$essid"
 }

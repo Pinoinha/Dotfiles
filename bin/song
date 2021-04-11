@@ -1,0 +1,8 @@
+#!/bin/env dash
+
+# prints current song playing in mpd
+song(){
+	song="$(mpc current)"
+
+	printf "%s" "$song"
+}

@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/env dash
 
 # copied from: 
 # https://www.reddit.com/r/herbstluftwm/comments/j4oq4k/does_anyone_know_how_i_could_allign_a_frame_to/gaejwks/?utm_source=reddit&utm_medium=web2x&context=3

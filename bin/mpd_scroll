@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
 zscroll --before-text "ﱘ  No current song playing" --delay 0.3 \
 		--match-command "mpc status" \

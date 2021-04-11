@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/env dash
 
 # script to pipe scanned networks to dmenu, using iwd
 

@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/env dash
 
 # hides focused window
 # if there are any hidden windows in the current desktop, \

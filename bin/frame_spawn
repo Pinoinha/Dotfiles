@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/env dash
 
 # Based on:
 # https://github.com/herbstluftwm/herbstluftwm/issues/1164

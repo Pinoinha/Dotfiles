@@ -20,7 +20,7 @@
 #
 # Then, in your .vimrc file, set:
 #
-#   g:vimwiki_customwiki2html=$HOME.'/.vim/autoload/vimwiki/customwiki2html.sh'
+#   g:vimwiki_customwiki2html=$HOME.'/.vim/autoload/vimwiki/customwiki2html.dash'
 #
 # On your next restart, Vimwiki will run this script instead of using the
 # internal wiki2html converter.

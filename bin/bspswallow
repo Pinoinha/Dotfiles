@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env dash
 
 # Get class of a wid
 get_class() {

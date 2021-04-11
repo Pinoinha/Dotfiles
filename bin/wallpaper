@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
 # Baseado no script do Luke Smith
 
@@ -6,9 +6,9 @@ DIR="$HOME/Imagens/Wallpapers"
 WAL="~/Imagens/Wallpapers/wall.png"
 
 # se o diretório existir, pegue um arquivo aleatoriamente
-[[ -d "$DIR" ]] && IMG=$(find "$DIR"/* | shuf -n 1)
+[ -d "$DIR" ] && IMG=$(find "$DIR"/* | shuf -n 1)
 
 # se a imagem for diferente do wallpaper atual, copie-a
-[[ "$IMG" != "$WAL" ]] && cp $IMG ~/Imagens/Wallpapers/wall.png 
+[ "$IMG" != "$WAL" ] && cp $IMG ~/Imagens/Wallpapers/wall.png 
 
 xwallpaper --stretch "$DIR"/wall.png && notify-send -i '"$DIR"/wall.png' 'Wallpaper alterado'

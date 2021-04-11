@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/env dash
 
 # relaunch DWM if the binary changes, otherwise bail
 csum=""

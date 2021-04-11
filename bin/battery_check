@@ -16,3 +16,5 @@ elif [[ $batt -eq 10 ]] ; then
 elif [[ $batt -le "$critical_level" ]]; then
 	notify-send -u critical "Bateria crítica!" "Nível de bateria alcançou 7%"; pkill -RTMIN+20 dwmblocks
 fi
+
+sleep 50

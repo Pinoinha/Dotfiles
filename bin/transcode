@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/env dash
 
 # Este script faz a transcodagem de um vídeo de um codec para outro, feito para reduzir em até 80% o tamanho do arquivo original.
 
