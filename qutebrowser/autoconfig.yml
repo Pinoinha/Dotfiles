@@ -31,7 +31,10 @@ settings:
   content.geolocation:
     https://g1.globo.com: false
   content.headers.accept_language:
-    global: en-US,en;q=0.9, pt-BR
+    global: en-US,en;q=0.5
+  content.headers.custom:
+    global:
+      accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
   content.media.audio_capture:
     https://meet.google.com: true
     https://web.whatsapp.com: true
