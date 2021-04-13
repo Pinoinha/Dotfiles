@@ -9,25 +9,19 @@ batt() {
 
 	icon=""
 
-	if [ "$state" -eq "Discharging" ]; then
+	[ "$batt" -le 7 ] && icon=""  && [ "$notif" -eq 0 ] && notify-send -u critical 'Bateria crítica!' 'Bateria atingiu 7%' && notif=1
 
-		[ "$batt" -le 7 ] && icon=""  && [ notif -eq 0 ] && notify-send -u critical 'Bateria crítica!' 'Bateria atingiu 7%' && "$notif"=1
+	[ "$batt" -le 10 ] && icon="" && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 10%' && notif=1
 
-		[ "$batt" -ge 7 ] && [ "$batt" -le 10 ] && icon="" && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 10%' && "$notif"=1
+	[ "$batt" -le 20 ] && [ "$batt" -ge 10 ] && icon="" && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 20%' && notif=1
 
-		[ "$batt" -ge 10 ] && [ "$batt" -le 20 ] && icon="" && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 20%' && "$notif"=1
+	[ "$batt" -le 50 ] && icon="" 
 
-		[ "$batt" -ge 20 ] && [ "$batt" -le 50 ] && icon="" 
+	[ "$batt" -ge 90 ] && icon="" 
 
-		[ "$batt" -le 96 ] && [ "$batt" -ge 90 ] && icon="" 
+	[ "$state" = "Charging" ] && icon=""
 
-		[ "$batt" -ge 96 ] && icon="" 
-
-	elif [ "$state" -eq "Charging" ]; then
-		icon=""
-
-		[ "$batt" -ge 98 ] && notify-send 'Bateria completamente carregada!' 'Bateria alcançou 100%' && icon=""
-	fi
+	[ "$state" = "Full" ] && icon="" && notify-send && notify-send 'Bateria completamente carregada!' 'Bateria alcançou 100%' && notif=1
 
 	printf "%s %d%%" "$icon" "$batt"
 }

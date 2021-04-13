@@ -19,6 +19,8 @@ alias zshrc='nvim ~/.config/zsh/.zshrc'
 
 alias bashrc='nvim ~/.bashrc'
 
+alias mkshrc='nvim ~/.mkshrc'
+
 alias tmconf='nvim ~/.tmux.conf'
 
 alias alconf='nvim ~/.config/alacritty/alacritty.yml'
@@ -98,6 +100,7 @@ alias pm='pulsemixer'
 alias yda='youtube-dl -4 -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
 alias xclip='xclip -sel copy'
 alias hc='herbstclient'
+alias tg='telegram-cli'
 
 # abre o GTA V com facilidade
 alias gtav='legendary launch 9d2d0eb64d5c44529cece33fe2a46482'
