@@ -1,19 +1,21 @@
+#!/bin/env bash
+
 # Configuração das variáveis de ambiente
 
 # export EDITOR
 export EDITOR="nvim"
 
 # export PAGER
-export PAGER="less"
+export PAGER="nvim -c 'set ft=man' -"
 
 # export BROWSER
-export BROWSER="brave"
+export BROWSER="firefox-developer-edition"
+
+# export BROWSER_CLI
+export BROWSER_CLI="w3m"
 
 # export TERMINAL, for ease when changing VTEs
-export TERMINAL="alacritty"
-
-# Steam variable
-export STEAM_FRAME_FORCE_CLOSE=1 steam
+export TERMINAL="st"
 
 # XDG dirs
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
@@ -28,8 +30,14 @@ export GOBIN="$GOPATH/bin"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export CARGO_BIN="$CARGO_HOME/bin"
 
+# For java applications
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # Rustup
- export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+# Weechat
+export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 
 # GTK-2.0
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
@@ -43,7 +51,16 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass""
 # Bash
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 
+# CUDA
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+
+# Stack
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+
 # Prompt
-export PS1="\[\e[1;36m\][\[\e[32m\]\u\[\e[31m\]@\[\e[35m\]\h\[\e[1;36m\]] \[\e[1;32m\]\W \[\e[1;33m\]\$: \[\e[0m\]"
+#export PS1="$(echo -e '\033[1;36m[\033[32m$USER\033[1;31m@\033[35m$(uname -n)\033[1;36m] \033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m: ')"
+
+# the control characters are used so that mksh doesn't go crazy with the escape characters
+export PS1="$(echo -e ' \033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m > ')"
 
 export PATH="$HOME/.local/bin":"$CARGO_BIN":"$GOBIN":$PATH

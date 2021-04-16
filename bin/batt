@@ -21,7 +21,7 @@ batt() {
 
 	[ "$state" = "Charging" ] && icon=""
 
-	[ "$state" = "Full" ] && icon="" && notify-send && notify-send 'Bateria completamente carregada!' 'Bateria alcançou 100%' && notif=1
+	[ "$state" = "Full" ] && icon="" && [ "$notif" -eq 0  ]&& notify-send 'Bateria completamente carregada!' 'Bateria alcançou 100%' && notif=1
 
 	printf "%s %d%%" "$icon" "$batt"
 }

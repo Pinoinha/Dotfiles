@@ -48,7 +48,7 @@ alias nvrc='nvim ~/.config/nvim/init.vim'
 alias ncc='nvim ~/.config/ncmpcpp/config'
 alias mpconf='nvim ~/.config/mpd/mpd.conf'
 
-alias muttrc='nvim $HOME/.config/mutt/muttrc'
+alias nmrc='nvim $HOME/.config/neomutt/neomuttrc'
 
 alias colors='nvim $HOME/.config/colors'
 
@@ -113,6 +113,9 @@ alias class='xprop | grep CLASS'
 
 # record whole screen with ffmpeg
 alias rec='ffmpeg -f x11grab -s 1920x1080 -i :0.0 Vídeos/rec.mp4'
+
+# list all installed packages with descriptions using fzf
+alias lspkgs="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
 # quickly change kb layout
 alias xkb='setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:swapescape'
