@@ -58,9 +58,9 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export STACK_ROOT="$XDG_DATA_HOME"/stack
 
 # Prompt
-#export PS1="$(echo -e '\033[1;36m[\033[32m$USER\033[1;31m@\033[35m$(uname -n)\033[1;36m] \033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m: ')"
+#export PS1="$(echo -e '\033[1;36m[\033[32m$USER\033[1;31m@\033[35m$(uname -n)\033[1;36m] \033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m: ')"
 
 # the control characters are used so that mksh doesn't go crazy with the escape characters
-export PS1="$(echo -e ' \033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m > ')"
+export PS1="$(echo -e '\033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m > ')"
 
 export PATH="$HOME/.local/bin":"$CARGO_BIN":"$GOBIN":$PATH
