@@ -1,0 +1,13 @@
+#!/bin/env dash
+
+# mutes the microphone and send a notification
+
+# default sink state: 1 if muted, 0 if else
+mute="$(pulsemixer --get-mute)"
+
+[ "$mute" -eq 0 ] && notify-send "Alto-falante" "Mudo"
+
+[ "$mute" -eq 1 ] && notify-send "Alto-falante" "Som reativado"
+
+# (un)mutes the speaker
+pulsemixer --toggle-mute

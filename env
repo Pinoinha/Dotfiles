@@ -17,6 +17,10 @@ export BROWSER_CLI="w3m"
 # export TERMINAL, for ease when changing VTEs
 export TERMINAL="st"
 
+# taskwarrior
+export TASKRC="$HOME/.config/task/taskrc"
+export TASKDATA="$HOME/.config/task/"
+
 # XDG dirs
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}

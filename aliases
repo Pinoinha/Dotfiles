@@ -100,10 +100,7 @@ alias pm='pulsemixer'
 alias yda='youtube-dl -4 -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
 alias xclip='xclip -sel copy'
 alias hc='herbstclient'
-alias tg='telegram-cli'
-
-# abre o GTA V com facilidade
-alias gtav='legendary launch 9d2d0eb64d5c44529cece33fe2a46482'
+alias neomutt='cd ~/Downloads && neomutt'
 
 # todo.txt
 alias t='todo.sh'
@@ -117,8 +114,7 @@ alias rec='ffmpeg -f x11grab -s 1920x1080 -i :0.0 Vídeos/rec.mp4'
 # list all installed packages with descriptions using fzf
 alias lspkgs="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
+alias integra="streamlink twitch.tv/integrapoli best --player mpv"
+
 # quickly change kb layout
 alias xkb='setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:swapescape'
-
-# poweroff alias
-alias pwr='doas poweroff'

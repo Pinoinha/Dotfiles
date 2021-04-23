@@ -1,0 +1,14 @@
+#!/bin/env bash
+
+# manage the program in which the url should be displayed in
+# intended use with programs such as urlscan or urlview
+
+urlname="$(basename "$1")"
+
+case "$urlname" in
+    *.jpg) urlImage "$1";;
+		*.jpeg) urlImage "$1";;
+		*.png) urlImage "$1";;
+		*.html) "$BROWSER_CLI"-I "UTF-8" -T text/html "$1";;
+		*) "$BROWSER" "$1"
+esac
