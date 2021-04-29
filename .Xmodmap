@@ -2,6 +2,6 @@ remove Lock = Caps_Lock
 
 keysym Escape = Caps_Lock
 keysym Caps_Lock = Escape
-keysym Menu = Super_R
+keysym Menu = Super_L
 
 add Lock = Caps_Lock
