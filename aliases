@@ -114,6 +114,8 @@ alias rec='ffmpeg -f x11grab -s 1920x1080 -i :0.0 Vídeos/rec.mp4'
 # list all installed packages with descriptions using fzf
 alias lspkgs="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
+alias lastpkgs="expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort | tail -n 20"
+
 alias integra="streamlink twitch.tv/integrapoli best --player mpv"
 
 # quickly change kb layout
