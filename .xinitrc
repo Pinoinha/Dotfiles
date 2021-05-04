@@ -13,20 +13,17 @@ fi
 [ -f /etc/xprofile ] && . /etc/xprofile
 [ -f ~/.xprofile ] && . ~/.xprofile
 
-# Faz a leitura do valor da bateria a cada minuto
-while true; do
-	"$("$HOME/.local/bin"/battery_check)"
-	sleep 1m
-done &
-
 # Arruma o teclado, e troca as funções de CAPS e Escape: 
 setxkbmap -model abnt2 -layout br -variant abnt2 
-
-# Ajusta as configuraçoes de teclado
-[ -f $HOME/.Xmodmap ] && xmodmap $HOME/.Xmodmap
 
 # Chama o xresources
 [ -f $HOME/.Xresources ] && xrdb $HOME/.Xresources
 
-# Inicializa o bspwm 
-exec bspwm
+# Xmodmap
+[ -f $HOME/.Xmodmap ] && xmodmap $HOME/.Xmodmap
+
+# Inicializa o dwmblocks
+exec dwmblocks &
+
+# Inicializa o dwm
+exec "$HOME/.local/bin/launch_dwm"

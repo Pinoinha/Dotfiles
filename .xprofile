@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Inicializa o sxhkd 
-pgrep -x sxhkd > /dev/null || sxhkd &
-
 # Setta um wallpaper aleatorio
 wallpaper &
 
@@ -12,23 +9,17 @@ dunst &
 # Inicializa o Picom
 picom -b --experimental-backends
 
-# Inicializa o Clipit
-clipit &
-
 # Inicializa o Redshift
 redshift &
 
 # Ativa o numlock
 numlockx &
 
-# Aumenta a taxa de repetição do teclado para 250 ms de delay e 40 repetições por segundo
-xset r rate 250 40
-
-# Inicializa o connman-gtk
-connman-gtk &
-
 # Ativa o unclutter
 unclutter &
+
+# Taxa de repetição
+xset r rate 250 40
 
 # MPD daemon start (if no other user instance exists)
 [ ! -s ~/.config/mpd/pid ] && mpd

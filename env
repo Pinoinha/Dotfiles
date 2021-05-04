@@ -5,11 +5,13 @@
 # export EDITOR
 export EDITOR="nvim"
 
+export SUDO_EDITOR="nvim"
+
 # export PAGER
 export PAGER="nvim -c 'set ft=man' -"
 
 # export BROWSER
-export BROWSER="firefox-developer-edition"
+export BROWSER="firefox"
 
 # export BROWSER_CLI
 export BROWSER_CLI="w3m"
