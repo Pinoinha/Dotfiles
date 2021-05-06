@@ -1,7 +1,44 @@
-! Tamanho do cursor
+!! Mouse cursor size
 Xcursor.size: 48
 
-! Colors
-*background:   #121212
-*foreground:   #eff0eb
-*cursorColor:  #9aedfe
+!! Colors
+*background:   #101112
+*foreground:   #dfdfdf
+*cursor.color: #dfdfdf
+
+! xterm config
+
+! sets the $TERM variable properly
+XTerm.termName: xterm-256color
+
+! ensures that xterm uses the system locale
+XTerm*locale: true
+
+! fixes Alt key
+XTerm*metaSensEscape: true
+
+! fixes the backspace key
+XTerm*backarrowKey: false
+XTerm.ttyModes: erase ^?
+
+! blinking cursor
+XTerm*cursorBlink: true
+XTerm*cursorColor: #dfdfdf
+
+! font
+XTerm*faceName: Hack:style=Bold:size=24
+
+! keybindings
+! these NEED to have the 'vt100' identifier
+XTerm.vt100.translations: #override \n\
+		Shift Ctrl <Key>U: scroll-back(1,halfpage) \n\
+		Shift Ctrl <Key>D: scroll-forw(1,halfpage) \n\
+   	Shift <KeyPress> Insert:insert-selection(SELECT, CUT_BUFFER0) \n\
+		Ctrl <Key>KP_Add: larger-vt-font() \n\
+		Ctrl <Key>KP_Subtract: smaller-vt-font() \n\
+		Ctrl <Key>0: set-vt-font(d) \n\
+		Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+  	Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
+		Shift Ctrl <Key>Return: spawn-new-terminal() \n\
+		<Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+  	<Btn2Up>: insert-selection(PRIMARY)
