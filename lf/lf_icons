@@ -1,0 +1,18 @@
+#!/bin/sh
+
+export LF_ICONS="\
+di=:\
+fi=:\
+ex=:\
+ln=:\
+or=:\
+*.vimrc=:\
+*.vim=:\
+*.git=:\
+*.mp3=:\
+*.jpg=:\
+*.jpeg=:\
+*.png=:\
+*.webp=:\
+*.mp4=:\
+"

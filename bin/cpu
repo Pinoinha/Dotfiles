@@ -5,7 +5,7 @@ cpu() {
 	#cpu="$(cat /proc/loadavg | awk '{print $3}'|cut -f 1 -d ".")"
 	cpu="$(iostat | awk '{print $1}' | grep '[0-9]')"
 	
-	printf "﬙  %.0f%%" "$cpu"
+	printf " %.0f%%" "$cpu"
 }
 
 cpu

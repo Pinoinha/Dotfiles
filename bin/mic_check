@@ -3,10 +3,10 @@
 # mutes the microphone and send a notification
 
 #  microphone mute state
-mute="$(pulsemixer --list-sources | grep -i default | awk '{print $11}' | sed -e 's/,//g')"
+#mute="$(pulsemixer --list-sources | grep -i default | awk '{print $10}' | sed -e 's/,//g')"
+#
+#[ "$mute" -eq 0 ] && notify-send "Microfone" "Mudo"
+#
+#[ "$mute" -eq 1 ] && notify-send "Microfone" "Reativado"
 
-[ "$mute" -eq 0 ] && notify-send "Microfone" "Mudo"
-
-[ "$mute" -eq 1 ] && notify-send "Microfone" "Reativado"
-
-pactl set-source-mute @DEFAULT_SOURCE@ toggle
+notify-send "Microfone" "Estado alterado" && pactl set-source-mute @DEFAULT_SOURCE@ toggle

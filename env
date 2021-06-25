@@ -2,31 +2,30 @@
 
 # Configuração das variáveis de ambiente
 
-# export EDITOR
-export EDITOR="nvim"
+# EDITOR
+export EDITOR="/usr/bin/nvim"
+export SUDO_EDITOR="/usr/bin/nvim"
 
-export SUDO_EDITOR="nvim"
+# PAGER
+export PAGER="less"
 
-# export PAGER
-export PAGER="nvim -c 'set ft=man' -"
-
-# export BROWSER
+# BROWSER
 export BROWSER="firefox"
 
-# export BROWSER_CLI
+# BROWSER_CLI
 export BROWSER_CLI="w3m"
 
-# export TERMINAL, for ease when changing VTEs
-export TERMINAL="st"
+# TERMINAL, for ease when changing VTEs
+export TERMINAL="alacritty"
 
-# taskwarrior
-export TASKRC="$HOME/.config/task/taskrc"
-export TASKDATA="$HOME/.config/task/"
+# guix
+export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+export GUIX_BIN="$HOME/.guix-profile/bin"
 
 # XDG dirs
-export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+export XDG_DATA_HOME="${XDG_DATA_HOME:="$HOME/.local/share"}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:="$HOME/.cache"}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:="$HOME/.config"}"
 
 # GO path
 export GOPATH="$XDG_DATA_HOME/go"
@@ -49,13 +48,16 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 # GPG
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+#export GNUPGHOME="${XDG_DATA_HOME:-"$HOME/.local/share/gnupg"}"
 
 # pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass""
 
-# Bash
-export HISTFILE="/tmp/.`id -nu`-history"
+# shell history
+export HISTFILE="/tmp/.$(id -nu)-history"
+
+# zsh
+export ZDOTDIR="$HOME/.config/zsh/"
 
 # CUDA
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
@@ -63,10 +65,24 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 # Stack
 export STACK_ROOT="$XDG_DATA_HOME"/stack
 
+# taskwarrior
+export TASKRC="$HOME/.config/task/taskrc"
+export VIT_DIR="$HOME/.config/vit"
+
+# source lf's icons
+[ -f "$HOME/.config/lf/lf_icons" ] && source "$HOME/.config/lf/lf_icons"
+
+# source nnn config
+[ -f "$HOME/.config/nnn/config" ] && source "$HOME/.config/nnn/config"
+
 # Prompt
 #export PS1="$(echo -e '\033[1;36m[\033[32m$USER\033[1;31m@\033[35m$(uname -n)\033[1;36m] \033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m: ')"
 
-# the control characters are used so that mksh doesn't go crazy with the escape characters
-export PS1="$(echo -e '\033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m > ')"
+# zshist prompt for use with zsh
+if [ "$SHELL" = "/bin/zsh" ]; then
+	PROMPT='%F{green}%~%f %F{yellow}$%f > '
+else
+	export PS1="$(echo -e '\033[1;32m$(basename "$PWD" | sed "s,math,~,")\033[33m $\033[0m > ')"
+fi
 
-export PATH="$HOME/.local/bin":"$CARGO_BIN":"$GOBIN":$PATH
+export PATH="$HOME/.local/bin":"$CARGO_BIN":"$GOBIN":"$GUIX_BIN":$PATH

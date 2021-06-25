@@ -7,23 +7,25 @@ batt() {
 	# resets when the script is called again
 	notif=0
 
-	icon=""
+	icon="  "
 
-	[ "$batt" -le 7 ] && icon=""  && [ "$notif" -eq 0 ] && notify-send -u critical 'Bateria crítica!' 'Bateria atingiu 7%' && notif=1
+	[ "$batt" -le 7 ] && icon="  "  && [ "$notif" -eq 0 ] && notify-send -u critical 'Bateria crítica!' 'Bateria atingiu 7%' && notif=1
 
-	[ "$batt" -le 10 ] && icon="" && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 10%' && notif=1
+	[ "$batt" -le 10 ] && icon="  " && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 10%' && notif=1
 
-	[ "$batt" -le 20 ] && [ "$batt" -ge 10 ] && icon="" && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 20%' && notif=1
+	[ "$batt" -le 20 ] && [ "$batt" -ge 10 ] && icon="  " && [ "$notif" -eq 0 ] && notify-send 'Bateria descarregando' 'Bateria atingiu 20%' && notif=1
 
-	[ "$batt" -le 50 ] && icon="" 
+	[ "$batt" -le 50 ] && icon="  " 
 
-	[ "$batt" -ge 90 ] && icon="" 
+	[ "$batt" -ge 90 ] && icon="  " 
 
-	[ "$state" = "Charging" ] && icon=""
+	[ "$state" = "Charging" ] && icon=" "
 
-	[ "$state" = "Full" ] && icon="" && [ "$notif" -eq 0  ]&& notify-send 'Bateria completamente carregada!' 'Bateria alcançou 100%' && notif=1
+	[ "$state" = "Full" ] && icon="" 
+# so it annoys me less
+#&& [ "$notif" -eq 0 ] && notify-send 'Bateria completamente carregada!' 'Bateria alcançou 100%' && notif=1
 
-	printf "%s %d%%" "$icon" "$batt"
+	printf "%s%d%%" "$icon" "$batt"
 }
 
 batt

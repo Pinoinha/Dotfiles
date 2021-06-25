@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# script pra excluir os e-mails repetidos na minha caixa de mensagens secundária
+
+mails="$@"
+
+for mail in mails; do
+	dup="$(grep -i 'delivered' "$mail" | awk '{print $2}')"
+
+	trash-put "$dup"
+done

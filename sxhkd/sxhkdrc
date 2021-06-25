@@ -2,39 +2,43 @@
 
 # Simple X Hotkey Daemon config
 
-# -- WM-indepedent commands -- #
+# -- WM-indepedent version -- #
 
 # reload sxhkd
 super + r
-	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+	pkill -USR1 -x sxhkd ; notify-send 'sxhkd' 'Reloaded config'
 
 # spawn terminal
 super + Return
 	$TERMINAL
 
-# spawn terminal as floating
+# spawn floating state
 super + shift + Return
-	bspc rule -a \* -o state=floating && $TERMINAL
+	$TERMINAL --class=flterm,flterm
 
-# spawn vimwiki
+# spawn vim
 super + v
 	$TERMINAL -e 'nvim'
 
 # run terminal applications
 super + e ; {1, 2, 3, 4, 5, 6}
-	$TERMINAL -e {lf, ncmpcpp, ncspot, newsboat, htop, pulsemixer}
+	$TERMINAL -e {nnn, newsboat, htop, pulsemixer, calc}
 
-# run graphical applications
-super + g ; {1, 2, 3}
-	{brave, librewolf, galculator}
+# run gui applications
+super + g ; {t, s, p}
+	{telegram-desktop, steam, pcmanfm} && notify-send 'Programa inicializado' {'telegram', 'steam', 'pcmanfm'}
+
+# run web browsers
+super + b ; {1, 2, 3}
+	{firefox, chromium, torbrowser-launcher}
 
 # lock the screen
 alt + shift + l
 	slock
 
 # dmenu based applications
-super + d ; {1, 2}
-	{dmenu_run, passmenu2}
+super + d ; {1, 2, 3, 4}
+	{dmenu_run -l 6, passmenu2, connect_wlan, ytfzf -D -s}
 
 # -- Screenshots -- #
 
@@ -44,7 +48,11 @@ super + d ; {1, 2}
 
 # print current window with scrot
 shift + @Print
-	scrot -u "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
+	scrot -u '%Y-%m-%d_$wx$h.png' -e 'mv $f /home/math/Imagens/Prints'
+
+# print entire screen with scrot
+alt + @Print
+	scrot "%Y-%m-%d_$wx$h.png" -e 'mv $f /home/math/Imagens/Prints'
 
 # -- Audio Control -- #
 
@@ -67,10 +75,10 @@ shift + F3
 	pulsemixer --change-volume +5
 
 XF86AudioMicMute
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	mic_check
 
 shift + F4
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	mic_check
 
 shift + F5
 	mpc stop
@@ -106,109 +114,3 @@ XF86MonBrightnessUp
 
 shift + F12
 	xbacklight -inc 10
-
-# -- BSPWM specific -- #
-
-# kill X
-super + alt + q
-	bspc quit
-
-# restart BPSWM
-super + shift + r
-	bspc wm -r; notify-send 'bspwm' 'Restarted'
-
-# kil window
-super + shift + w
-	bspc node -c 
-
-# toggle Monocle layout
-super + alt + m
-	bspc desktop -l next
-
-# set node tiling
-super + t
-	bspc node -t tiled
-
-# set node pseudotiling
-super + shift + t
-	bspc node -t pseudo_tiled
-
-# toggle node floating
-super + space
-	bspc node -t \~floating
-
-# toggle node fullscreen
-super + f
-	bspc node -t \~fullscreen
-
-# move/resize floating windows with mouse
-super + {left click, right click}
-	bspc config {pointer_action1 move, pointer_action2 resize_side}
-
-# move a floating window
-super + shift + {Left,Down,Up,Right}
-	bspc node -v {-40 0,0 40,0 -40,40 0}
-
-# toggle node sticky (in all desktops)
-super + i
-	bspc node -g sticky
-
-# focus nodes
-super + {h,j,k,l}
-	bspc node -f {west, south, north, east}
-
-# focus the next/previous node in the current desktop
-alt + Tab
-	bspc node -f {next,prev}.local.!hidden.window
-
-# expand a node by moving two of its side outward
-super + ctrl + l
-	bspc node -z {bottom 0 20,right 20 0}
-
-# contract a node by moving two of its side inward
-super + ctrl + h
-	bspc node -z {bottom 0 -20,right -20 0}
-
-# focus on desktop
-super + {1-9,0}
-	bspc desktop -f '^{1-9,10}'
-
-# send node to desktop and focus on it
-super + shift + {1-9,0}
-	bspc node -d '^{1-9,10}' --follow
-
-# focus the next/previous desktop in the current monitor
-super + {bracketleft,bracketright}
-	bspc desktop -f {prev,next}.local
-
-# send node to prev desktop
-super + shift + {bracketleft,bracketright}
-	bspc node -d {prev,next} --follow
-
-# Focus the last node/desktop
-super + Tab
-	bspc desktop -f last
-
-# send node to last desktop
-super + shift + Tab
-	bspc node -d last --follow
-
-# preselect direction
-super + {Left,Down,Up,Right}
-	bspc node -p {west,south,north,east}
-
-# swap node in direction
-super + shift + {h,j,k,l}
-	bspc node -s {west,south,north,east} --follow
-
-# rotate nodes 90º
-super + ctrl + r
-	bspc node @/ -R 90
-
-# hides node
-super + b
-	bspc node -g hidden=on
-
-# unhides node
-super + shift + b
-	bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off

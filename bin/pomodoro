@@ -1,0 +1,10 @@
+#!/bin/sh
+
+pomodoro () {
+	case "$1" in 
+		"iniciar");;
+		"pausar");;
+		"parar");;
+		*)
+	esac
+}

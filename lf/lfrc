@@ -48,6 +48,15 @@ cmd delete ${{
     [ $ans = "y" ] && rm -rf $fx
 }}
 
+# shred command 
+cmd shred ${{
+	set -f 
+	printf "$fx\n"
+	printf "do you wish to permanently shred these files?[y/n]"
+	read ans
+	[ $ans = "y" ] && shred -u $fx
+}}
+
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -139,6 +148,9 @@ map t trash
 
 # delete folder or file
 map D delete
+
+# shred folder or file
+map S shred
 
 # use enter for shell commands
 map <enter> shell

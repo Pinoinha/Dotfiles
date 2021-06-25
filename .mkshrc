@@ -24,7 +24,6 @@
 bind ^L=clear-screen
 
 HISTSIZE=256
-HISTFILE=/tmp/.`id -nu`-history
 
 alias ..="cd .."
 
@@ -35,7 +34,8 @@ alias ..="cd .."
 
 source $HOME/.config/aliases
 
-alias ls='ls --color=auto'
+# Usar o modo de edição vi
+#set -o vi
 
 # Importando os aliases
 [ -f "$HOME/.config/aliases" ] && . "$HOME/.config/aliases"

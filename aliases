@@ -1,4 +1,4 @@
-# Meus alias para bash/zsh
+# meus alias para bash/zsh
 
 # enable color support of ls and also add handy aliases
   if [ -x /usr/bin/dircolors ]; then
@@ -11,10 +11,14 @@
       alias egrep='egrep --color=auto'
   fi
 
-# Open alias file
+# open alias file
 alias aliases='nvim ~/.config/aliases'
 
-# Config files aliases
+# cd to previous directory
+alias ..='cd ..'
+alias repos='cd ~/.local/repos'
+
+# config files aliases
 alias zshrc='nvim ~/.config/zsh/.zshrc'
 
 alias bashrc='nvim ~/.bashrc'
@@ -52,6 +56,14 @@ alias nmrc='nvim $HOME/.config/neomutt/neomuttrc'
 
 alias colors='nvim $HOME/.config/colors'
 
+alias inputrc='nvim $HOME/.inputrc'
+
+alias taskrc='nvim $HOME/.task/taskrc'
+
+alias mbsyncrc='nvim $HOME/.mbsyncrc'
+
+alias rprc='nvim $HOME/.ratpoisonrc'
+
 # suckless utilities
 alias dwconf="nvim ~/.local/repos/dwm-meu/config.def.h"
 alias dwcomp="cd ~/.local/repos/dwm-meu && rm -rf config.h && doas make clean install && cd"
@@ -87,6 +99,26 @@ alias yss='yay -Ssa'
 alias ysi='yay -Si'
 alias y='yay -S'
 
+# apt aliases
+alias api='sudo apt install'
+alias aps='apt search'
+alias apr='sudo apt autoremove'
+alias apf='apt-file search'
+alias apl='apt list --installed'
+alias apu='sudo apt update && sudo apt upgrade'
+
+# vpm aliases
+alias vpm='vpm --color=yes'
+alias vpi='doas vpm install'
+alias vps='vpm search'
+alias vpr='doas vpm removerecursive'
+alias vpl='vpm list'
+
+# guix aliases
+alias gui='guix install'
+alias gur='guix remove'
+alias gus='export PAGER="less" && guix search'
+
 # git aliases
 alias gs='git status'
 alias ga='git add'
@@ -98,12 +130,13 @@ alias v='nvim'
 alias V='doas nvim'
 alias pm='pulsemixer'
 alias yda='youtube-dl -4 -x --audio-format mp3 -o "~/Música/%(title)s.%(ext)s"'
+alias ytdl='youtube-dl'
 alias xclip='xclip -sel copy'
 alias hc='herbstclient'
 alias neomutt='cd ~/Downloads && neomutt'
 
-# todo.txt
-alias t='todo.sh'
+# taskwarrior
+alias t='task'
 
 # to see window classes, for use in bsp rules
 alias class='xprop | grep CLASS'
@@ -116,7 +149,8 @@ alias lspkgs="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bin
 
 alias lastpkgs="expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort | tail -n 20"
 
-alias integra="streamlink twitch.tv/integrapoli best --player mpv"
+# using visudo
+alias visudo="export SUDO_EDITOR='nvim' && sudo visudo"
 
 # quickly change kb layout
 alias xkb='setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:swapescape'
